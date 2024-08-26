@@ -11,6 +11,8 @@ export class Home {
   newproductPhoto: string
   @Prop()
   browseRangePhotos: [string]
+  @Prop({ default: false })
+  active: boolean
 }
 
 export const homeModel = SchemaFactory.createForClass(Home)

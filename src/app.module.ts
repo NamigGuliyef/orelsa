@@ -8,10 +8,12 @@ import { ProductController } from './product/product.controller';
 import { ProductModule } from './product/product.module';
 import { ContactController } from './contact/contact.controller';
 import { ContactModule } from './contact/contact.module';
+import { AdminController } from './admin/admin.controller';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
-  imports: [HomePageModule, ProductModule, ContactModule],
-  controllers: [AppController, HomePageController, ProductController, ContactController],
+  imports: [HomePageModule, ProductModule, ContactModule, AdminModule],
+  controllers: [AppController, HomePageController, ProductController, ContactController, AdminController],
   providers: [AppService, HomePageService],
 })
 export class AppModule {}

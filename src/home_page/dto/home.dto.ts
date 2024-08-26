@@ -1,6 +1,6 @@
-import { IsNotEmpty } from "class-validator"
+import { IsNotEmpty, IsOptional } from "class-validator"
 
-export class createNewProductDto {
+export class createNewCollectionDto {
   @IsNotEmpty()
   title: string
   @IsNotEmpty()
@@ -8,11 +8,13 @@ export class createNewProductDto {
 }
 
 
-export class updateNewProductDto {
+export class updateNewCollectiontDto {
   @IsNotEmpty()
   title: string
   @IsNotEmpty()
   description: string
+  @IsOptional()
+  active: boolean
 }
 
 
