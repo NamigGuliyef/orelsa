@@ -1,7 +1,7 @@
 import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose'
 
 @Schema({ versionKey: false, timestamps: true })
-export class Home {
+export class HomeNewCollection {
   _id: string
   @Prop()
   title: string
@@ -9,10 +9,20 @@ export class Home {
   description: string
   @Prop()
   newproductPhoto: string
-  @Prop()
-  browseRangePhotos: [string]
   @Prop({ default: false })
   active: boolean
 }
 
-export const homeModel = SchemaFactory.createForClass(Home)
+export const homeNewCollectionModel = SchemaFactory.createForClass(HomeNewCollection)
+
+
+@Schema({ versionKey: false, timestamps: true })
+export class HomeBrowseRange {
+  _id: string
+  @Prop()
+  description: string
+  @Prop()
+  browseRangePhotos: string
+}
+
+export const HomeBrowseRangeModel = SchemaFactory.createForClass(HomeBrowseRange)

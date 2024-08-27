@@ -3,12 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import cloudinary from 'src/config/cloudinary';
 import { createNewCollectionDto, updateNewCollectiontDto } from 'src/home_page/dto/home.dto';
-import { Home } from 'src/home_page/model/home.schema';
+import { HomeNewCollection } from 'src/home_page/model/home.schema';
 import { MessageResponse } from 'src/utils/messagetype';
+
 
 @Injectable()
 export class AdminService {
-  constructor(@InjectModel('home') private readonly homeModel: Model<Home>) { }
+  constructor(@InjectModel('home') private readonly homeModel: Model<HomeNewCollection>) { }
 
 
   // Home page - yeni kolleksiya bölməsinin yaradılması
@@ -46,6 +47,25 @@ export class AdminService {
 
 
   // Home page - yeni kolleksiya bölməsin silmək
+  async deleteNewCollection(_id:string):Promise<MessageResponse>{
+    const newCollection = await this.homeModel.findById(_id)
+    if (!newCollection) throw new HttpException('Silmək istədiyiniz kolleksiya bazada mövcud deyildir', HttpStatus.NOT_FOUND)
+      await this.homeModel.findByIdAndDelete(_id)
+    return { message:" Uğurla bazadan silindi ✔" }
+  }
+
+
+  // Home page - yeni kolleksiya bölməsində datalara baxış
+  async getAllNewCollection():Promise<HomeNewCollection[]>{
+    return await this.homeModel.find()
+  }
+
+
+  // Home page - yeni kolleksiya bölməsində datalara ID ilə baxış
+  async getSingleNewCollection(_id:string):Promise<HomeNewCollection>{
+    return await this.homeModel.findById(_id)
+  }
+
 
 
 }
