@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AdminService } from './admin.service';
-import { AdminController } from './admin.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { homeNewCollectionModel } from 'src/home_page/model/home.schema';
+import { HomeBrowseRangeModel, homeNewCollectionModel } from 'src/home_page/model/home.schema';
+import { AdminController } from './admin.controller';
+import { AdminService } from './admin.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'home', schema: homeNewCollectionModel }])],
+  imports: [MongooseModule.forFeature([{ name: 'home-newCollection', schema: homeNewCollectionModel }, { name: 'home-browseRange', schema: HomeBrowseRangeModel}])],
   controllers: [AdminController],
   providers: [AdminService]
 })
 export class AdminModule {}
+

@@ -22,7 +22,7 @@ export class HomeBrowseRange {
   @Prop()
   description: string
   @Prop()
-  browseRangePhotos: string
+  browseRangePhoto: string
 }
 
 export const HomeBrowseRangeModel = SchemaFactory.createForClass(HomeBrowseRange)
