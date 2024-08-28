@@ -1,41 +1,45 @@
-import { IsNotEmpty, IsOptional } from "class-validator"
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class createProduct {
   @IsNotEmpty()
-  name: string
+  name: string;
   @IsNotEmpty()
-  description: string
+  description: string;
   @IsNotEmpty()
-  price: string
+  price: number;
   @IsOptional()
-  discount: string
+  discount: number;
   @IsOptional()
-  discount_price: string
+  discount_price: number;
   @IsNotEmpty()
-  model_no: string
+  model_no: string;
   @IsNotEmpty()
-  category: string
+  category: string;
   @IsNotEmpty()
-  new: boolean
+  new: boolean;
+  @IsOptional()
+  active: boolean;
 }
+
 
 
 export class updateProduct {
   @IsNotEmpty()
-  name: string
+  name: string;
   @IsNotEmpty()
-  description: string
+  description: string;
   @IsNotEmpty()
-  price: string
+  price: number;
   @IsOptional()
-  discount: string
+  discount: number;
   @IsOptional()
-  discount_price: string
+  discount_price: number;
   @IsNotEmpty()
-  model_no: string
+  model_no: string;
   @IsNotEmpty()
-  category: string
+  category: string;
   @IsNotEmpty()
-  new: boolean
+  new: boolean;
+  @IsOptional()
+  active: boolean;
 }
-

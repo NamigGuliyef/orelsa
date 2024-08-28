@@ -8,6 +8,8 @@ export class createNewCollectionDto {
   @ApiProperty()
   @IsNotEmpty()
   description: string
+  @IsOptional()
+  active: boolean
 }
 
 
