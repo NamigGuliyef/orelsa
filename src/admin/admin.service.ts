@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import cloudinary from 'src/config/cloudinary';
 import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, updateNewCollectiontDto } from 'src/home_page/dto/home.dto';
 import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
-import { createProduct } from 'src/product/dto/product.dto';
+import { createProduct, updateProduct } from 'src/product/dto/product.dto';
 import { Product } from 'src/product/model/product.schema';
 import { MessageResponse } from 'src/utils/messagetype';
 
@@ -129,28 +129,61 @@ export class AdminService {
 
 
   // yeni məhsul yarat
-  async createProduct(CreateProduct:createProduct, photos:Express.Multer.File[]):Promise<MessageResponse>{
-    const { category, name, model_no, discount,price ,discount_price}= CreateProduct
-    const existProduct=await this.productModel.findOne({category,name,model_no})
-    if(existProduct) throw new HttpException('Məhsul artıq yaradılıb',HttpStatus.CONFLICT)
-      
-      // məhsul yoxdursa yenisi yaradılır
-    let productPhotos=[]
-      for(let i=0; i<photos.length; i++ ){
-        const data =await cloudinary.uploader.upload(photos[i].path,{public_id:photos[i].originalname})
-        productPhotos.push(data.secure_url)
+  async createProduct(CreateProduct: createProduct, photos: Express.Multer.File[]): Promise<MessageResponse> {
+    const { category, name, model_no, discount, price } = CreateProduct
+    const existProduct = await this.productModel.findOne({ category, name, model_no })
+    if (existProduct) throw new HttpException('Məhsul artıq yaradılıb', HttpStatus.CONFLICT)
+
+    // məhsul yoxdursa yenisi yaradılır
+    let productPhotos = []
+    for (let i = 0; i < photos.length; i++) {
+      const data = await cloudinary.uploader.upload(photos[i].path, { public_id: photos[i].originalname })
+      productPhotos.push(data.secure_url)
     }
-    
+
     // əgər məhsula endirim verilirsə
-    if ( discount ){
-      let discountPrice = price -(price*discount/100)
-      await this.productModel.create({...CreateProduct, discount_price: discountPrice, photos:productPhotos})
-      return { message:'Yeni məhsul yaradıldı ✅' }
+    if (discount) {
+      let discountPrice = price - (price * discount / 100)
+      await this.productModel.create({ ...CreateProduct, discount_price: discountPrice, photos: productPhotos })
+      return { message: 'Yeni məhsul yaradıldı ✅' }
       // endirimsiz olarsa
     } else {
-      await this.productModel.create({...CreateProduct,photos:productPhotos})
-      return { message:'Yeni məhsul yaradıldı ✅' }
+      const { discount, discount_price, ...CreateProductWithoutDiscount } = CreateProduct
+      await this.productModel.create({ ...CreateProductWithoutDiscount, photos: productPhotos })
+      return { message: 'Yeni məhsul yaradıldı ✅' }
     }
   }
+
+
+  // Yaranmış məhsulda dəyişiklik et
+  async updateProduct(_id: string, UpdateProduct: updateProduct, photos: Express.Multer.File[]): Promise<MessageResponse> {
+    const { category, name, model_no, discount, price } = UpdateProduct
+    const existProduct = await this.productModel.findOne({ category, name, model_no })
+    if (existProduct) throw new HttpException('Məhsul artıq bazada mövcuddur !', HttpStatus.CONFLICT)
+
+    let productPhotos = []
+    for (let i = 0; i < photos.length; i++) {
+      const data = await cloudinary.uploader.upload(photos[i].path, { public_id: photos[i].originalname })
+      productPhotos.push(data.secure_url)
+    }
+
+    // Əgər şəkil və discount -da dəyişiklik edilirsə
+    if ((photos[0].path && photos[0] && photos) && discount) {
+      let discountPrice = price - (price * discount / 100)
+      await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, discount_price: discountPrice, photos: productPhotos } })
+      return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
+      // Əgər şəkildə dəyişirsə
+    } else if (photos[0].path && photos[0] && photos) {
+      await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, photos: productPhotos } })
+      return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
+      // Əgər şəkil,discount xaric qalan məlumatlar dəyişirsə
+    } else {
+      const { discount, discount_price, ...UpdateProductWithoutDiscount } = UpdateProduct
+      await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProductWithoutDiscount } })
+      return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
+    }
+
+  }
+
 
 }
