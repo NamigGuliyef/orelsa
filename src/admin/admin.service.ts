@@ -157,9 +157,9 @@ export class AdminService {
 
   // Yaranmış məhsulda dəyişiklik et
   async updateProduct(_id: string, UpdateProduct: updateProduct, photos: Express.Multer.File[]): Promise<MessageResponse> {
-    const { category, name, model_no, discount, price } = UpdateProduct
-    const existProduct = await this.productModel.findOne({ category, name, model_no })
-    if (existProduct) throw new HttpException('Məhsul artıq bazada mövcuddur !', HttpStatus.CONFLICT)
+    const {discount, price,discount_price } = UpdateProduct
+    const existProduct = await this.productModel.findById(_id)
+    if (!existProduct) throw new HttpException('Məhsul artıq bazada mövcud deyil !', HttpStatus.CONFLICT)
 
     let productPhotos = []
     for (let i = 0; i < photos.length; i++) {
@@ -167,23 +167,38 @@ export class AdminService {
       productPhotos.push(data.secure_url)
     }
 
-    // Əgər şəkil və discount -da dəyişiklik edilirsə
-    if ((photos[0].path && photos[0] && photos) && discount) {
-      let discountPrice = price - (price * discount / 100)
+    let discountPrice = price - (price * discount / 100)
+    // Əgər şəkil dəyişiklik edilirsə
+    if (photos && photos[0] && photos[0].path) {
       await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, discount_price: discountPrice, photos: productPhotos } })
       return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
-      // Əgər şəkildə dəyişirsə
-    } else if (photos[0].path && photos[0] && photos) {
-      await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, photos: productPhotos } })
-      return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
-      // Əgər şəkil,discount xaric qalan məlumatlar dəyişirsə
+      // Əgər discount dəyişirsə
     } else {
-      const { discount, discount_price, ...UpdateProductWithoutDiscount } = UpdateProduct
-      await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProductWithoutDiscount } })
+      await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, discount_price: discountPrice } })
       return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
     }
-
   }
+
+
+  // Yaranmış məhsulu sil
+  async deleteProduct(_id:string):Promise<MessageResponse>{
+    await this.productModel.findByIdAndDelete(_id)
+    return {message:"Məhsul silindi ❌"}
+  }
+
+
+  // Bütün məhsulları gətir
+  async getAllProduct():Promise<Product[]>{
+    return await this.productModel.find()
+  }
+
+
+  // İD -sinə görə gətir
+  async getSingleProduct(_id:string):Promise<Product>{
+    return await this.productModel.findById(_id)
+  }
+
+
 
 
 }

@@ -7,6 +7,7 @@ import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, upd
 import { MessageResponse } from 'src/utils/messagetype';
 import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
 import { createProduct, updateProduct } from 'src/product/dto/product.dto';
+import { Product } from 'src/product/model/product.schema';
 
 @ApiTags('admin')
 @ApiBearerAuth()
@@ -213,6 +214,35 @@ export class AdminController {
   async updateProduct(@Param('_id') _id: string, @Body() UpdateProduct: updateProduct, @UploadedFiles() photos: Express.Multer.File[]): Promise<MessageResponse> {
     return await this.adminService.updateProduct(_id, UpdateProduct, photos)
   }
+
+
+
+  // Yaranmış məhsulu sil
+  @ApiOperation({summary:"Yaranmış məhsulu sil"})
+  @Delete('/dashboard/product/:_id')
+  @HttpCode(HttpStatus.OK)
+  async deleteProduct(@Param('_id') _id:string):Promise<MessageResponse>{
+    return this.adminService.deleteProduct(_id)
+  }
+
+
+  // Bütün məhsulları gətir
+  @ApiOperation({summary:'Bütün məhsulları gətir'})
+  @Get('/dashboard/product')
+  @HttpCode(HttpStatus.OK)
+  async getAllProduct():Promise<Product[]>{
+    return await this.adminService.getAllProduct()
+  }
+
+
+  // İD -sinə görə gətir
+  @ApiOperation({summary:'Bütün məhsulları gətir'})
+  @Get('/dashboard/product/:_id')
+  @HttpCode(HttpStatus.OK)
+  async getSingleProduct(@Param('_id') _id:string):Promise<Product>{
+    return await this.adminService.getSingleProduct(_id)
+  }
+
 
 
 }
