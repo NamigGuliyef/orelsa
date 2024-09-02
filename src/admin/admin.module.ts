@@ -7,6 +7,7 @@ import {
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { productModel } from 'src/product/model/product.schema';
+import { subscribeModel } from 'src/subscribe/model/subscribe.schema';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { productModel } from 'src/product/model/product.schema';
       { name: 'home-newCollection', schema: homeNewCollectionModel },
       { name: 'home-browseRange', schema: HomeBrowseRangeModel },
       { name: 'product', schema: productModel },
+      { name: 'subscribe', schema: subscribeModel }
     ]),
   ],
   controllers: [AdminController],

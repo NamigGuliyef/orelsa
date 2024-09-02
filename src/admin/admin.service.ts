@@ -1,3 +1,4 @@
+import { MailerService } from '@nestjs-modules/mailer';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -6,6 +7,7 @@ import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, upd
 import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
 import { createProduct, updateProduct } from 'src/product/dto/product.dto';
 import { Product } from 'src/product/model/product.schema';
+import { Subscribe } from 'src/subscribe/model/subscribe.schema';
 import { MessageResponse } from 'src/utils/messagetype';
 
 
@@ -13,7 +15,8 @@ import { MessageResponse } from 'src/utils/messagetype';
 export class AdminService {
   constructor(@InjectModel('home-newCollection') private readonly homeNewCollectionModel: Model<HomeNewCollection>,
     @InjectModel('home-browseRange') private readonly homeBrowseRangeModel: Model<HomeBrowseRange>,
-    @InjectModel('product') private readonly productModel: Model<Product>,
+    @InjectModel('product') private readonly productModel: Model<Product>, @InjectModel('subscribe') private readonly subscribeModel: Model<Subscribe>,
+    private mailerService: MailerService
   ) { }
 
 
@@ -141,10 +144,28 @@ export class AdminService {
       productPhotos.push(data.secure_url)
     }
 
+    // Yeni məhsul məlumatı məlumatı üçün abunə datası gətirilir
+    const subscribe = await this.subscribeModel.find()
     // əgər məhsula endirim verilirsə
     if (discount) {
       let discountPrice = price - (price * discount / 100)
       await this.productModel.create({ ...CreateProduct, discount_price: discountPrice, photos: productPhotos })
+      for (let i = 0; i < subscribe.length; i++) {
+        this.mailerService.sendMail({
+          from: 'orelsacosmetics@gmail.com',
+          to: `${subscribe[i].email}`,
+          subject: "Orelsa cosmetics - yeni məhsul bildirişi",
+          html: `<h4>Məhsul adı : ${CreateProduct.name}</h4><br>
+                 <h4>Məhsul haqqında: ${CreateProduct.description}</h4><br>
+                 <h4>Məhsul kateqoriyası : ${CreateProduct.category}</h4><br>
+                 <h4>Məhsul qiyməti : ${CreateProduct.price} AZN</h4><br>
+                 <img src="${productPhotos[0]}" alt="Məhsul şəkli"/>
+                 <h2>Sayta keçid: orelsacosmetics.az</h2><br>
+                 <h2>Bizimlə əlaqə: +994559706747</h2>
+                 `
+        })
+      }
+
       return { message: 'Yeni məhsul yaradıldı ✅' }
       // endirimsiz olarsa
     } else {
@@ -157,7 +178,7 @@ export class AdminService {
 
   // Yaranmış məhsulda dəyişiklik et
   async updateProduct(_id: string, UpdateProduct: updateProduct, photos: Express.Multer.File[]): Promise<MessageResponse> {
-    const {discount, price,discount_price } = UpdateProduct
+    const { discount, price, discount_price } = UpdateProduct
     const existProduct = await this.productModel.findById(_id)
     if (!existProduct) throw new HttpException('Məhsul artıq bazada mövcud deyil !', HttpStatus.CONFLICT)
 
@@ -181,24 +202,25 @@ export class AdminService {
 
 
   // Yaranmış məhsulu sil
-  async deleteProduct(_id:string):Promise<MessageResponse>{
+  async deleteProduct(_id: string): Promise<MessageResponse> {
     await this.productModel.findByIdAndDelete(_id)
-    return {message:"Məhsul silindi ❌"}
+    return { message: "Məhsul silindi ❌" }
   }
 
 
   // Bütün məhsulları gətir
-  async getAllProduct():Promise<Product[]>{
+  async getAllProduct(): Promise<Product[]> {
     return await this.productModel.find()
   }
 
 
   // İD -sinə görə gətir
-  async getSingleProduct(_id:string):Promise<Product>{
+  async getSingleProduct(_id: string): Promise<Product> {
     return await this.productModel.findById(_id)
   }
 
 
+  // gelen kontaktlari gormek
 
 
 }

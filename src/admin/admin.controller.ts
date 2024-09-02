@@ -218,30 +218,33 @@ export class AdminController {
 
 
   // Yaranmış məhsulu sil
-  @ApiOperation({summary:"Yaranmış məhsulu sil"})
+  @ApiOperation({ summary: "Yaranmış məhsulu sil" })
   @Delete('/dashboard/product/:_id')
   @HttpCode(HttpStatus.OK)
-  async deleteProduct(@Param('_id') _id:string):Promise<MessageResponse>{
+  async deleteProduct(@Param('_id') _id: string): Promise<MessageResponse> {
     return this.adminService.deleteProduct(_id)
   }
 
 
   // Bütün məhsulları gətir
-  @ApiOperation({summary:'Bütün məhsulları gətir'})
+  @ApiOperation({ summary: 'Bütün məhsulları gətir' })
   @Get('/dashboard/product')
   @HttpCode(HttpStatus.OK)
-  async getAllProduct():Promise<Product[]>{
+  async getAllProduct(): Promise<Product[]> {
     return await this.adminService.getAllProduct()
   }
 
 
   // İD -sinə görə gətir
-  @ApiOperation({summary:'Bütün məhsulları gətir'})
+  @ApiOperation({ summary: 'Bütün məhsulları gətir' })
   @Get('/dashboard/product/:_id')
   @HttpCode(HttpStatus.OK)
-  async getSingleProduct(@Param('_id') _id:string):Promise<Product>{
+  async getSingleProduct(@Param('_id') _id: string): Promise<Product> {
     return await this.adminService.getSingleProduct(_id)
   }
+
+
+  
 
 
 
