@@ -159,7 +159,8 @@ export class AdminService {
                  <h4>Məhsul haqqında: ${CreateProduct.description}</h4><br>
                  <h4>Məhsul kateqoriyası : ${CreateProduct.category}</h4><br>
                  <h4>Məhsul qiyməti : ${CreateProduct.price} AZN</h4><br>
-                 <img src="${productPhotos[0]}" alt="Məhsul şəkli"/>
+                 <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
+                 <img src="${productPhotos[1]}" alt="Məhsul şəkli" width="200" height="200"/>
                  <h2>Sayta keçid: orelsacosmetics.az</h2><br>
                  <h2>Bizimlə əlaqə: +994559706747</h2>
                  `
@@ -188,14 +189,50 @@ export class AdminService {
       productPhotos.push(data.secure_url)
     }
 
+    // Dəyişdirilmiş məhsul üçün də maillərə bildiriş getsin
+    const subscribe = await this.subscribeModel.find()
     let discountPrice = price - (price * discount / 100)
     // Əgər şəkil dəyişiklik edilirsə
     if (photos && photos[0] && photos[0].path) {
       await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, discount_price: discountPrice, photos: productPhotos } })
+      for (let i = 0; i < subscribe.length; i++) {
+        this.mailerService.sendMail({
+          from: 'orelsacosmetics@gmail.com',
+          to: `${subscribe[i].email}`,
+          subject: "Orelsa cosmetics - məhsulda qiymət dəyişikliyi",
+          html: `<h4>Məhsul adı : ${UpdateProduct.name}</h4><br>
+                 <h4>Məhsul haqqında: ${UpdateProduct.description}</h4><br>
+                 <h4>Məhsul kateqoriyası : ${UpdateProduct.category}</h4><br>
+                 <h4>Məhsul qiyməti : ${UpdateProduct.price} AZN</h4><br>
+                 <h4>Məhsul endirim qiyməti : ${discountPrice} AZN</h4><br>
+                 <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
+                 <img src="${productPhotos[1]}" alt="Məhsul şəkli" width="200" height="200"/>
+                 <h2>Sayta keçid: orelsacosmetics.az</h2><br>
+                 <h2>Bizimlə əlaqə: +994559706747</h2>
+                 `
+        })
+      }
       return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
       // Əgər discount dəyişirsə
     } else {
       await this.productModel.findByIdAndUpdate(_id, { $set: { ...UpdateProduct, discount_price: discountPrice } })
+      for (let i = 0; i < subscribe.length; i++) {
+        this.mailerService.sendMail({
+          from: 'orelsacosmetics@gmail.com',
+          to: `${subscribe[i].email}`,
+          subject: "Orelsa cosmetics - məhsulda qiymət dəyişikliyi",
+          html: `<h4>Məhsul adı : ${UpdateProduct.name}</h4><br>
+                 <h4>Məhsul haqqında: ${UpdateProduct.description}</h4><br>
+                 <h4>Məhsul kateqoriyası : ${UpdateProduct.category}</h4><br>
+                 <h4>Məhsul qiyməti : ${UpdateProduct.price} AZN</h4><br>
+                 <h4>Məhsul endirim qiyməti : ${discountPrice} AZN</h4><br>
+                 <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
+                 <img src="${productPhotos[1]}" alt="Məhsul şəkli" width="200" height="200"/>
+                 <h2>Sayta keçid: orelsacosmetics.az</h2><br>
+                 <h2>Bizimlə əlaqə: +994559706747</h2>
+                 `
+        })
+      }
       return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
     }
   }
