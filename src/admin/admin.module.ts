@@ -8,6 +8,7 @@ import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { productModel } from 'src/product/model/product.schema';
 import { subscribeModel } from 'src/subscribe/model/subscribe.schema';
+import { contactModel } from 'src/contact/model/contact.schema';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { subscribeModel } from 'src/subscribe/model/subscribe.schema';
       { name: 'home-newCollection', schema: homeNewCollectionModel },
       { name: 'home-browseRange', schema: HomeBrowseRangeModel },
       { name: 'product', schema: productModel },
-      { name: 'subscribe', schema: subscribeModel }
+      { name: 'subscribe', schema: subscribeModel },
+      { name: 'contact', schema: contactModel }
     ]),
   ],
   controllers: [AdminController],

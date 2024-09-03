@@ -8,6 +8,8 @@ import { MessageResponse } from 'src/utils/messagetype';
 import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
 import { createProduct, updateProduct } from 'src/product/dto/product.dto';
 import { Product } from 'src/product/model/product.schema';
+import { Subscribe } from 'src/subscribe/model/subscribe.schema';
+import { Contact } from 'src/contact/model/contact.schema';
 
 @ApiTags('admin')
 @ApiBearerAuth()
@@ -236,7 +238,7 @@ export class AdminController {
 
 
   // İD -sinə görə gətir
-  @ApiOperation({ summary: 'Bütün məhsulları gətir' })
+  @ApiOperation({ summary: 'Məhsulu İD -sinə görə gətir' })
   @Get('/dashboard/product/:_id')
   @HttpCode(HttpStatus.OK)
   async getSingleProduct(@Param('_id') _id: string): Promise<Product> {
@@ -244,9 +246,22 @@ export class AdminController {
   }
 
 
-  
-
+  // gelen kontaktlari gormek
+  @ApiOperation({summary:"Bizimlə əlaqə bölməsini gör"})
+  @Get('/dashboard/contact')
+  @HttpCode(HttpStatus.OK)  
+  async getAllContact():Promise<Contact[]>{
+        return await this.adminService.getAllContact()
+  }
+   
+   
+  // abonələri gör
+  @ApiOperation({summary:"Abunələri gör"})
+  @Get('/dashboard/subscribe')
+  @HttpCode(HttpStatus.OK)
+  async getAllSubscribe():Promise<Subscribe[]>{
+       return await this.adminService.getAllSubscribe()
+  }
 
 
 }
-
