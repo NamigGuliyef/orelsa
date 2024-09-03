@@ -247,20 +247,20 @@ export class AdminController {
 
 
   // gelen kontaktlari gormek
-  @ApiOperation({summary:"Bizimlə əlaqə bölməsini gör"})
+  @ApiOperation({ summary: "Bizimlə əlaqə bölməsini gör" })
   @Get('/dashboard/contact')
-  @HttpCode(HttpStatus.OK)  
-  async getAllContact():Promise<Contact[]>{
-        return await this.adminService.getAllContact()
+  @HttpCode(HttpStatus.OK)
+  async getAllContact(): Promise<Contact[]> {
+    return await this.adminService.getAllContact()
   }
-   
-   
+
+
   // abonələri gör
-  @ApiOperation({summary:"Abunələri gör"})
+  @ApiOperation({ summary: "Abunələri gör" })
   @Get('/dashboard/subscribe')
   @HttpCode(HttpStatus.OK)
-  async getAllSubscribe():Promise<Subscribe[]>{
-       return await this.adminService.getAllSubscribe()
+  async getAllSubscribe(): Promise<Subscribe[]> {
+    return await this.adminService.getAllSubscribe()
   }
 
 

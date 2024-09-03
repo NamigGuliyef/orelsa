@@ -13,11 +13,11 @@ import { MessageResponse } from 'src/utils/messagetype';
 @Injectable()
 export class GuestService {
   constructor(@InjectModel('subscribe') private readonly subscribeModel: Model<Subscribe>,
-  @InjectModel('contact') private readonly contactModel: Model<Contact>,
-  @InjectModel('product') private readonly productModel: Model<Product>, 
-  @InjectModel('home-newCollection') private readonly homeNewCollectionModel: Model<HomeNewCollection>,
-  @InjectModel('home-browseRange') private readonly homeBrowseRangeModel: Model<HomeBrowseRange>,
-  private mailerService: MailerService
+    @InjectModel('contact') private readonly contactModel: Model<Contact>,
+    @InjectModel('product') private readonly productModel: Model<Product>,
+    @InjectModel('home-newCollection') private readonly homeNewCollectionModel: Model<HomeNewCollection>,
+    @InjectModel('home-browseRange') private readonly homeBrowseRangeModel: Model<HomeBrowseRange>,
+    private mailerService: MailerService
   ) { }
 
   // subscribe
@@ -38,19 +38,19 @@ export class GuestService {
 
 
   // Bizimlə əlaqə bölməsinin doldurulması
-   async contactUs(createContact:CreateContact):Promise<MessageResponse>{
-    const{name,email} = createContact
-    const contactUs = await this.contactModel.findOne({name,email})
-    if(contactUs) throw new HttpException('Artıq sizin məlumatlarınız bizim bazada mövcuddur.Tezliklə geri dönüş ediləcəkdir.', HttpStatus.CONFLICT)
-      await this.contactModel.create(createContact)
+  async contactUs(createContact: CreateContact): Promise<MessageResponse> {
+    const { name, email } = createContact
+    const contactUs = await this.contactModel.findOne({ name, email })
+    if (contactUs) throw new HttpException('Artıq sizin məlumatlarınız bizim bazada mövcuddur.Tezliklə geri dönüş ediləcəkdir.', HttpStatus.CONFLICT)
+    await this.contactModel.create(createContact)
     return { message: "Sizinlə tezliklə əlaqə saxlanacaq. Məlumatınız üçün təşəkkür edirik." }
-   }
+  }
 
 
 
   // Bütün məhsulları gətir
   async getAllProduct(): Promise<Product[]> {
-    return await this.productModel.find({ active:true })
+    return await this.productModel.find({ active: true })
   }
 
 
@@ -60,16 +60,16 @@ export class GuestService {
   }
 
 
-    // Home page - yeni kolleksiya bölməsində datalara baxış
+  // Home page - yeni kolleksiya bölməsində datalara baxış
   async getAllNewCollection(): Promise<HomeNewCollection[]> {
-    return await this.homeNewCollectionModel.find({ active:true })
+    return await this.homeNewCollectionModel.find({ active: true })
   }
 
 
-    // Home page - seçilmiş kateqoriyalar bölməsində datalara baxış
-    async getAllBrowseRange(): Promise<HomeBrowseRange[]> {
-      return await this.homeBrowseRangeModel.find()
-    }
+  // Home page - seçilmiş kateqoriyalar bölməsində datalara baxış
+  async getAllBrowseRange(): Promise<HomeBrowseRange[]> {
+    return await this.homeBrowseRangeModel.find()
+  }
 
 
 

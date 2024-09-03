@@ -1,0 +1,1 @@
+export const jwtSecret = 'orelsacosmetics_az_jwt_secret'

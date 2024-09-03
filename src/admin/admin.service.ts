@@ -16,7 +16,7 @@ import { MessageResponse } from 'src/utils/messagetype';
 export class AdminService {
   constructor(@InjectModel('home-newCollection') private readonly homeNewCollectionModel: Model<HomeNewCollection>,
     @InjectModel('home-browseRange') private readonly homeBrowseRangeModel: Model<HomeBrowseRange>,
-    @InjectModel('product') private readonly productModel: Model<Product>, 
+    @InjectModel('product') private readonly productModel: Model<Product>,
     @InjectModel('subscribe') private readonly subscribeModel: Model<Subscribe>,
     @InjectModel('contact') private readonly contactModel: Model<Contact>,
     private mailerService: MailerService
@@ -261,13 +261,13 @@ export class AdminService {
 
 
   // gelen kontaktlari gormek
-  async getAllContact():Promise<Contact[]>{
-   return await this.contactModel.find()
-}
+  async getAllContact(): Promise<Contact[]> {
+    return await this.contactModel.find()
+  }
 
 
   // abonələri gör
-  async getAllSubscribe():Promise<Subscribe[]>{
+  async getAllSubscribe(): Promise<Subscribe[]> {
     return this.subscribeModel.find()
   }
 

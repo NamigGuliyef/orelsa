@@ -33,22 +33,25 @@ export class GuestController {
 
 
   // Bizimlə əlaqə bölməsinin doldurulması
-  @ApiOperation({summary:"Bizimlə əlaqə formunu doldur"})
-  @ApiBody({schema:{type:"object",
-    properties:{
-      name:{type:"string"},
-      email:{type:"string"},
-      subject:{type:"string"},
-      message:{type:"string"},
+  @ApiOperation({ summary: "Bizimlə əlaqə formunu doldur" })
+  @ApiBody({
+    schema: {
+      type: "object",
+      properties: {
+        name: { type: "string" },
+        email: { type: "string" },
+        subject: { type: "string" },
+        message: { type: "string" },
+      }
     }
-  }})
+  })
   @Post('/contact-us')
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe())
-  async contactUs(@Body() createContact:CreateContact):Promise<MessageResponse>{
+  async contactUs(@Body() createContact: CreateContact): Promise<MessageResponse> {
     return await this.guestService.contactUs(createContact)
   }
-  
+
 
 
   // Bütün məhsulları gətir
@@ -70,16 +73,16 @@ export class GuestController {
 
 
   // Home page - yeni kolleksiya bölməsində datalara baxış
-  @ApiOperation({summary:"Yeni kolleksiyanı görsün"})
+  @ApiOperation({ summary: "Yeni kolleksiyanı görsün" })
   @Get('/homeNewCollection')
   @HttpCode(HttpStatus.OK)
   async getAllNewCollection(): Promise<HomeNewCollection[]> {
     return await this.guestService.getAllNewCollection()
-  } 
+  }
 
 
-   // Home page - seçilmiş kateqoriyalar bölməsində datalara baxış
-  @ApiOperation({summary:"Seçilmiş kateqoriyaları gör"})
+  // Home page - seçilmiş kateqoriyalar bölməsində datalara baxış
+  @ApiOperation({ summary: "Seçilmiş kateqoriyaları gör" })
   @Get('/homeBrowseRange')
   @HttpCode(HttpStatus.OK)
   async getAllBrowseRange(): Promise<HomeBrowseRange[]> {
@@ -87,4 +90,5 @@ export class GuestController {
   }
 
 
+  
 }
