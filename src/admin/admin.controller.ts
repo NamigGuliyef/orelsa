@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UploadedFile, UploadedFiles, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
@@ -10,6 +10,7 @@ import { createProduct, updateProduct } from 'src/product/dto/product.dto';
 import { Product } from 'src/product/model/product.schema';
 import { Subscribe } from 'src/subscribe/model/subscribe.schema';
 import { Contact } from 'src/contact/model/contact.schema';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('admin')
 @ApiBearerAuth()

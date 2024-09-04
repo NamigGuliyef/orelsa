@@ -1,8 +1,9 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { adminDto } from 'src/admin/dto/admin.dto';
 import { MessageResponse, tokenMessageResponse } from 'src/utils/messagetype';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -24,6 +25,7 @@ export class AuthController {
   @Post('/sign-up')
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe())
+  @UseGuards(AuthGuard)
   async SignUp(@Body() AdminDto: adminDto): Promise<MessageResponse> {
     return await this.authService.SignUp(AdminDto)
   }

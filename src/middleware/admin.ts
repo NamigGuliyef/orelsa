@@ -5,7 +5,7 @@ import { jwtSecret } from "src/auth/jsonwebtoken";
 
 export class adminMiddleware implements NestMiddleware {
   use(req: any, res: any, next: (error?: any) => void) {
-    const token = req.headers.authorization?.split[' '][1]
+    const token = req.headers.authorization?.split(' ')[1]
     if (!token) {
       throw new HttpException('No auth token', HttpStatus.NOT_FOUND)
     }
