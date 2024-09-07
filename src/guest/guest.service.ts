@@ -1,7 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { model, Model } from 'mongoose';
 import { CreateContact } from 'src/contact/dto/contact.dto';
 import { Contact } from 'src/contact/model/contact.schema';
 import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
@@ -9,6 +9,7 @@ import { Product } from 'src/product/model/product.schema';
 import { createSubscribeDto } from 'src/subscribe/dto/subscribe.dto';
 import { Subscribe } from 'src/subscribe/model/subscribe.schema';
 import { MessageResponse } from 'src/utils/messagetype';
+import { productSearch } from './query.types';
 
 @Injectable()
 export class GuestService {
@@ -72,8 +73,22 @@ export class GuestService {
   }
 
 
+  // category -sinə aid məhsullar gəlsin
+  async getProductByCategory(_id: string): Promise<Product[]> {
+    const product = await this.productModel.findById(_id)
+    return await this.productModel.find({ category: product.category })
+  }
 
 
-  // GUEST UCUN GET EMELIYYATLARI
-  // GUEST UCUN FILTER EMELIYYATLARI
+  // category filter
+  async productSearch(ProductSearch: productSearch): Promise<Product[]> {
+    const { name, description, model_no, category } = ProductSearch
+    const filter: any = {}
+    if (name) filter.name = { $regex: name, $options: 'i' }
+    if (description) filter.description = { $regex: description, $options: 'i' }
+    if (model_no) filter.model_no = { $regex: model_no, $options: 'i' }
+    if (category) filter.category = { $regex: category, $options: 'i' }
+    return await this.productModel.find(filter)
+  }
+
 }

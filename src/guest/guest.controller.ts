@@ -1,11 +1,12 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { createSubscribeDto } from 'src/subscribe/dto/subscribe.dto';
 import { MessageResponse } from 'src/utils/messagetype';
 import { GuestService } from './guest.service';
 import { Product } from 'src/product/model/product.schema';
 import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
 import { CreateContact } from 'src/contact/dto/contact.dto';
+import { productSearch } from './query.types';
 
 @ApiTags('guest')
 @Controller('guest')
@@ -90,5 +91,26 @@ export class GuestController {
   }
 
 
-  
+  // category -sinə aid məhsullar gəlsin
+  @ApiOperation({ summary: "Baxılan məhsulun kateqroiyasında olanlara da baxmaq" })
+  @Get('/product-category/:_id')
+  @HttpCode(HttpStatus.OK)
+  async getProductByCategory(@Param('_id') _id: string): Promise<Product[]> {
+    return await this.guestService.getProductByCategory(_id)
+  }
+
+
+  // Məhsul axtarışı
+  @ApiOperation({ summary: "Məhsul axtarışı" })
+  @ApiQuery({ name: 'name', required: false, type: String, description: 'Məhsulun adı' })
+  @ApiQuery({ name: 'description', required: false, type: String, description: 'Məhsul haqqinda' })
+  @ApiQuery({ name: 'model_no', required: false, type: String, description: 'Məhsul modeli' })
+  @ApiQuery({ name: 'category', required: false, type: String, description: 'Məhsulun kateqoriyası' })
+  @Get('/search')
+  @HttpCode(HttpStatus.OK)
+  async productSearch(@Query() ProductSearch: productSearch): Promise<Product[]> {
+    return await this.guestService.productSearch(ProductSearch)
+  }
+
+
 }
