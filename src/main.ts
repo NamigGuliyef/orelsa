@@ -11,14 +11,10 @@ async function bootstrap() {
       'Orelsa - İran və digər ölkələrdən olan kosmetik məhsulların satışı',
     )
     .setVersion('1.0')
-    .addServer('http://localhost:3000/api')
     .addBearerAuth()
-    .build();
-
-    console.log(process.env.BASE_URL);
-    
+    .build();    
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('', app, document);
 
   await app.listen(9089);
 }
