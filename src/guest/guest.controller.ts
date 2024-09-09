@@ -1,11 +1,11 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { createSubscribeDto } from 'src/subscribe/dto/subscribe.dto';
-import { MessageResponse } from 'src/utils/messagetype';
+import { createSubscribeDto } from '../subscribe/dto/subscribe.dto';
+import { MessageResponse } from '../utils/messagetype';
 import { GuestService } from './guest.service';
-import { Product } from 'src/product/model/product.schema';
-import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
-import { CreateContact } from 'src/contact/dto/contact.dto';
+import { Product } from '../product/model/product.schema';
+import { HomeBrowseRange, HomeNewCollection } from '../home_page/model/home.schema';
+import { CreateContact } from '../contact/dto/contact.dto';
 import { productSearch } from './query.types';
 
 @ApiTags('guest')

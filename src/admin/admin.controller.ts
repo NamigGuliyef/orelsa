@@ -1,16 +1,15 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AdminService } from './admin.service';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UploadedFile, UploadedFiles, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { MulterOptions } from 'src/config/multer';
-import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, updateNewCollectiontDto } from 'src/home_page/dto/home.dto';
-import { MessageResponse } from 'src/utils/messagetype';
-import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
-import { createProduct, updateProduct } from 'src/product/dto/product.dto';
-import { Product } from 'src/product/model/product.schema';
-import { Subscribe } from 'src/subscribe/model/subscribe.schema';
-import { Contact } from 'src/contact/model/contact.schema';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { MulterOptions } from '../config/multer';
+import { Contact } from '../contact/model/contact.schema';
+import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, updateNewCollectiontDto } from '../home_page/dto/home.dto';
+import { HomeBrowseRange, HomeNewCollection } from '../home_page/model/home.schema';
+import { createProduct, updateProduct } from '../product/dto/product.dto';
+import { Product } from '../product/model/product.schema';
+import { Subscribe } from '../subscribe/model/subscribe.schema';
+import { MessageResponse } from '../utils/messagetype';
+import { AdminService } from './admin.service';
 
 @ApiTags('admin')
 @ApiBearerAuth()

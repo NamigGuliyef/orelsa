@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } 
 import { Observable } from 'rxjs';
 import { jwtSecret } from './jsonwebtoken';
 import { verify } from 'jsonwebtoken';
-import { Admin } from 'src/admin/model/admin.schema';
+import { Admin } from '../admin/model/admin.schema';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

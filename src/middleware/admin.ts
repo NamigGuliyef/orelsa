@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, NestMiddleware } from "@nestjs/common";
 import { verify } from "jsonwebtoken";
-import { Admin } from "src/admin/model/admin.schema";
-import { jwtSecret } from "src/auth/jsonwebtoken";
+import { Admin } from "../admin/model/admin.schema";
+import { jwtSecret } from "../auth/jsonwebtoken";
 
 export class adminMiddleware implements NestMiddleware {
   use(req: any, res: any, next: (error?: any) => void) {

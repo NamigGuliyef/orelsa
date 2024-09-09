@@ -2,14 +2,14 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import cloudinary from 'src/config/cloudinary';
-import { Contact } from 'src/contact/model/contact.schema';
-import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, updateNewCollectiontDto } from 'src/home_page/dto/home.dto';
-import { HomeBrowseRange, HomeNewCollection } from 'src/home_page/model/home.schema';
-import { createProduct, updateProduct } from 'src/product/dto/product.dto';
-import { Product } from 'src/product/model/product.schema';
-import { Subscribe } from 'src/subscribe/model/subscribe.schema';
-import { MessageResponse } from 'src/utils/messagetype';
+import cloudinary from '../config/cloudinary';
+import { Contact } from '../contact/model/contact.schema';
+import { createBrowseRangeDto, createNewCollectionDto, updateBrowseRangeDto, updateNewCollectiontDto } from '../home_page/dto/home.dto';
+import { HomeBrowseRange, HomeNewCollection } from '../home_page/model/home.schema';
+import { createProduct, updateProduct } from '../product/dto/product.dto';
+import { Product } from '../product/model/product.schema';
+import { Subscribe } from '../subscribe/model/subscribe.schema';
+import { MessageResponse } from '../utils/messagetype';
 
 
 @Injectable()

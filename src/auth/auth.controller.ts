@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { adminDto } from 'src/admin/dto/admin.dto';
-import { MessageResponse, tokenMessageResponse } from 'src/utils/messagetype';
+import { adminDto } from '../admin/dto/admin.dto';
+import { MessageResponse, tokenMessageResponse } from '../utils/messagetype';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 

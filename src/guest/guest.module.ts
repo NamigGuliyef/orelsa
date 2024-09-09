@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { subscribeModel } from 'src/subscribe/model/subscribe.schema';
+import { subscribeModel } from '../subscribe/model/subscribe.schema';
 import { GuestController } from './guest.controller';
 import { GuestService } from './guest.service';
-import { contactModel } from 'src/contact/model/contact.schema';
-import { productModel } from 'src/product/model/product.schema';
-import { HomeBrowseRangeModel, homeNewCollectionModel } from 'src/home_page/model/home.schema';
+import { contactModel } from '../contact/model/contact.schema';
+import { productModel } from '../product/model/product.schema';
+import { HomeBrowseRangeModel, homeNewCollectionModel } from '../home_page/model/home.schema';
 
 @Module({
   imports: [

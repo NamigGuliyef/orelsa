@@ -3,12 +3,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   HomeBrowseRangeModel,
   homeNewCollectionModel,
-} from 'src/home_page/model/home.schema';
+} from '../home_page/model/home.schema';
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
-import { productModel } from 'src/product/model/product.schema';
-import { subscribeModel } from 'src/subscribe/model/subscribe.schema';
-import { contactModel } from 'src/contact/model/contact.schema';
+import { productModel } from '../product/model/product.schema';
+import { subscribeModel } from '../subscribe/model/subscribe.schema';
+import { contactModel } from '../contact/model/contact.schema';
 
 @Module({
   imports: [

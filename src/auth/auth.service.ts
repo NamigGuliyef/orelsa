@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { compare, genSalt, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Model } from 'mongoose';
-import { adminDto } from 'src/admin/dto/admin.dto';
-import { Admin } from 'src/admin/model/admin.schema';
-import { MessageResponse, tokenMessageResponse } from 'src/utils/messagetype';
+import { adminDto } from '../admin/dto/admin.dto';
+import { Admin } from '../admin/model/admin.schema';
+import { MessageResponse, tokenMessageResponse } from '../utils/messagetype';
 import { jwtSecret } from './jsonwebtoken';
 
 @Injectable()
