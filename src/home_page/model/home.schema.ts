@@ -1,28 +1,29 @@
-import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose'
+import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
 
 @Schema({ versionKey: false, timestamps: true })
 export class HomeNewCollection {
-  _id: string
+  _id: string;
   @Prop()
-  title: string
+  title: string;
   @Prop()
-  description: string
+  description: string;
   @Prop()
-  newproductPhoto: string
+  newproductPhoto: string;
   @Prop({ default: false })
-  active: boolean
+  active: boolean;
 }
 
-export const homeNewCollectionModel = SchemaFactory.createForClass(HomeNewCollection)
-
+export const homeNewCollectionModel =
+  SchemaFactory.createForClass(HomeNewCollection);
 
 @Schema({ versionKey: false, timestamps: true })
 export class HomeBrowseRange {
-  _id: string
+  _id: string;
   @Prop()
-  description: string
+  description: string;
   @Prop()
-  browseRangePhoto: string
+  browseRangePhoto: string;
 }
 
-export const HomeBrowseRangeModel = SchemaFactory.createForClass(HomeBrowseRange)
+export const HomeBrowseRangeModel =
+  SchemaFactory.createForClass(HomeBrowseRange);

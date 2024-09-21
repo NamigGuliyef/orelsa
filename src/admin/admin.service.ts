@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { MailerService } from '@nestjs-modules/mailer';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
