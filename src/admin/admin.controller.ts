@@ -48,7 +48,8 @@ export class AdminController {
       properties: {
         title: { type: 'string' },
         description: { type: 'string' },
-        photo: { type: 'string', format: 'binary' }
+        photo: { type: 'string', format: 'binary' },
+        active: { type: 'boolean', description: "aktiv və ya qeyri aktiv olmasi" }
       }
     }
   })
