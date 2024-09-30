@@ -40,9 +40,9 @@ export class AdminService {
 
     const newCollection = await this.homeNewCollectionModel.findById(_id)
     if (!newCollection) throw new HttpException('Dəyişmək istədiyiniz kolleksiya bazada mövcud deyildir', HttpStatus.NOT_FOUND)
-    const { title, description } = UpdateNewCollectiontDto
-    const existNewCollection = await this.homeNewCollectionModel.findOne({ title, description })
-    if (existNewCollection) throw new HttpException('Dəyişmək istədiyiniz başlıq və mətn artıq mövcuddur', HttpStatus.CONFLICT)
+    // const { title, description } = UpdateNewCollectiontDto
+    // const existNewCollection = await this.homeNewCollectionModel.findOne({ title, description })
+    // if (existNewCollection) throw new HttpException('Dəyişmək istədiyiniz başlıq və mətn artıq mövcuddur', HttpStatus.CONFLICT)
 
     // Şəkil və yazılar tam dəyişirsə
     if (photo && photo.path) {
