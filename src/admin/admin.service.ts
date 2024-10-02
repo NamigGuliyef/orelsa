@@ -40,10 +40,6 @@ export class AdminService {
 
     const newCollection = await this.homeNewCollectionModel.findById(_id)
     if (!newCollection) throw new HttpException('Dəyişmək istədiyiniz kolleksiya bazada mövcud deyildir', HttpStatus.NOT_FOUND)
-    // const { title, description } = UpdateNewCollectiontDto
-    // const existNewCollection = await this.homeNewCollectionModel.findOne({ title, description })
-    // if (existNewCollection) throw new HttpException('Dəyişmək istədiyiniz başlıq və mətn artıq mövcuddur', HttpStatus.CONFLICT)
-
     // Şəkil və yazılar tam dəyişirsə
     if (photo && photo.path) {
       const data = await cloudinary.uploader.upload(photo.path, { public_id: photo.originalname })
@@ -51,9 +47,16 @@ export class AdminService {
       return { message: "Yeni kolleksiyada dəyişikliklər icra olundu!✅" }
     } else {
       // Şəkil xaric digər datalar dəyişirsə
-      await this.homeNewCollectionModel.findByIdAndUpdate(_id, { $set: { ...UpdateNewCollectiontDto } }, { new: true })
-      return { message: "Yeni kolleksiyada dəyişikliklər icra olundu!✅" }
+      const updatedNewCollection = await this.homeNewCollectionModel.findByIdAndUpdate(_id, { $set: { ...UpdateNewCollectiontDto } }, { new: true })
+      if (updatedNewCollection.active === true){
+        await this.homeNewCollectionModel.updateMany(
+          { _id: { $ne: _id } },  // Mövcud kolleksiya xaricində olanlar
+          { $set: { active: false } }  // active sahəsini false edirik
+        )
+      }
+        return { message: "Yeni kolleksiyada dəyişikliklər icra olundu!✅" }
     }
+
   }
 
 
