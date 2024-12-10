@@ -14,9 +14,9 @@ const Rooms: React.FC = () => {
             "10+ Gözəllik və Baxım Sirri"
             </h3>
             <p className="w-[265px] pt-4 lg:pt-[105px]">
-             "Hər dəri və saç tipi üçün xüsusi hazırlanmış baxım sirrlərini kəşf edin! 
+             Hər dəri və saç tipi üçün xüsusi hazırlanmış baxım sirrlərini kəşf edin! 
               Gözəlliyinizə dəyər qatacaq təbii tərkibli kremlər və şampunlarla özünüzə zaman ayırın.
-              Sağlam və parlaq görünüş indi daha əlçatandır!"
+              Sağlam və parlaq görünüş indi daha əlçatandır!
             </p>
           </div>
           <div className="col-span-1 lg:col-span-3 lg:max-h-[556px] h-full">
