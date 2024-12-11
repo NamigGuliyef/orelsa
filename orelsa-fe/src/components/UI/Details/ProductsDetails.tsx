@@ -56,21 +56,22 @@ const ProductsDetails = ({
             id="second-part"
             className="flex flex-col sm:items-start items-center w-full sm:w-auto"
           >
-            <div className="py-4 bg-red text-center sm:text-center">
-              <h2 className="font-normal text-4xl py-2">{name}</h2>
-              <p className="font-medium text-2xl text-[#9F9F9F] pb-5">
-                {price + " AZN"}
-              </p>
-              <p className="font-normal text-sm sm:w-[50ch] w-[90%]">
-                {description}
-              </p>
-            </div>
+        <div className="py-4 bg-red text-center sm:text-center">
+  <h2 className="font-normal text-4xl py-4 text-green-500">{name}</h2>
+  <p className="font-normal text-sm sm:w-[50ch] w-[90%] mt-6">
+    {description}
+  </p>
+  <p className="font-medium text-2xl text-red-500 my-6">
+    {price + " AZN"}
+  </p>
+</div>
 
             <div className="flex pt-20 pb-40 justify-center sm:justify-start">
-              <Button className="w-56 h-[75px] bg-[#B88E2F] font-bold text-white text-base">
-                SİFARİŞ ET
-              </Button>
-            </div>
+  <Button className="w-56 h-[75px] bg-[#B88E2F] font-bold text-white text-base transform hover:translate-x-2">
+    SİFARİŞ ET
+  </Button>
+</div>
+
             <hr />
             <div className="flex flex-col w-full pt-10">
               <div className="flex gap-3">
