@@ -40,13 +40,21 @@ export default function ShopPage() {
     setChildDataLength(data);
   };
 
-  const handleNumberOfProductsChange = (numberOfProducts: {
-    0: string;
-    anchorKey: string;
-    currentKey: string;
-  }): void => {
-    setSelectedNumberOfProducts(toNumber(numberOfProducts?.currentKey) ?? 16);
+  const handleNumberOfProductsChange = (keys: string | Set<string> | { currentKey?: string }) => {
+    let selectedKey = 16;
+
+    if (typeof keys === "string") {
+      selectedKey = parseInt(keys, 10);
+    } else if (keys instanceof Set) {
+      const firstKey = Array.from(keys)[0];
+      selectedKey = parseInt(firstKey, 10);
+    } else if (typeof keys === "object" && keys?.currentKey) {
+      selectedKey = parseInt(keys.currentKey, 10);
+    }
+  
+    setSelectedNumberOfProducts(selectedKey || 16);
   };
+  
 
   return (
     <main className="w-full h-full overflow-hidden">
