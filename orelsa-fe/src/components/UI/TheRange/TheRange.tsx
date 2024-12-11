@@ -19,7 +19,7 @@ const TheRange: React.FC = async () => {
           </div>
           <div className="text-center mb-4">
             <p className="w-full max-w-xl">
-            Keyfiyyət və unikallıq bir arada – sizin üçün xüsusi seçilmişdir!
+            "Keyfiyyət və unikallıq bir arada – sizin üçün xüsusi seçilmişdir!"
             </p>
           </div>
 

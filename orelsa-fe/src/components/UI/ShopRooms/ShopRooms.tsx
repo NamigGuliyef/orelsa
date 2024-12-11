@@ -14,10 +14,11 @@ const ShopRooms = ({
   onSendData: (num: number) => void;
 }) => {
   const [products, setProducts] = useState<ProductDetail[]>([]);
+
   useEffect(() => {
     const getProductsList = async () => {
       const url = "http://localhost:9089/guest/product";
-  
+
       try {
         const { data } = await axios.get(url, {
           headers: {
@@ -25,14 +26,14 @@ const ShopRooms = ({
           },
         });
         setProducts(data);
-        onSendData(data?.length ?? 0); // Dış bir bağımlılık
+        onSendData(data?.length ?? 0);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     getProductsList();
-  }, [onSendData]); // Bağımlılık eklendi
-  
+  }, []);
+
   return (
     <section>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mt-10 pb-3">
