@@ -8,7 +8,7 @@ import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 type RelatedProducts = {
-  relatedProducts: IProduct;
+  relatedProducts: IProduct[]
 };
 
 const RelatedProducts = ({ relatedProducts }: RelatedProducts) => {
