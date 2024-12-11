@@ -67,7 +67,7 @@ const SearchBar = () => {
                   </Link>
                 ))
               : searchQuery && (
-                  <div className="p-2 text-gray-500">No results found</div>
+                  <div className="p-2 text-gray-500">Məhsul tapılmadı ❌</div>
                 )}
           </div>
         )}

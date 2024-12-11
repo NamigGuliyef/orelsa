@@ -236,7 +236,6 @@ export class AdminService {
                  <h4>Məhsul qiyməti : ${UpdateProduct.price} AZN</h4><br>
                  <h4>Məhsul endirim qiyməti : ${discountPrice} AZN</h4><br>
                  <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
-                 <img src="${productPhotos[1]}" alt="Məhsul şəkli" width="200" height="200"/>
                  <h2>Sayta keçid: orelsacosmetics.az</h2><br>
                  <h2>Bizimlə əlaqə: +994559706747</h2>
                  `
