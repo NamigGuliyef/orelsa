@@ -6,7 +6,7 @@ import { IRange } from "@/Utils/db";
 
 const TheRange: React.FC = async () => {
   const { data } = await axios.get(
-    "http://localhost:9089/guest/homeBrowseRange"
+    "https://orelsa.vercel.app/guest/homeBrowseRange"
   );
   return (
     <section>

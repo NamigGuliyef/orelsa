@@ -41,7 +41,7 @@ const AdminAddNewFavorites: React.FC<{
 
       try {
         await axios.post(
-          "http://localhost:9089/admin/dashboard/homeBrowseRange",
+          "https://orelsa.vercel.app/admin/dashboard/homeBrowseRange",
           formData,
           {
             headers: {

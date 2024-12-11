@@ -19,7 +19,7 @@ const AdminLogin: React.FC = () => {
     try {
       const {
         data: { token, message },
-      } = await axios.post("http://localhost:9089/auth/sign-in", {
+      } = await axios.post("https://orelsa.vercel.app/auth/sign-in", {
         username,
         password,
       });

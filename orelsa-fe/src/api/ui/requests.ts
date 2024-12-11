@@ -14,7 +14,7 @@ export const getDetailsById = async (id: string) => {
 
 export const getRelatedProductsById = async (id: string) => {
   const { data } = await axios.get(
-    `http://localhost:9089/guest/product-category/${id}`
+    `https://orelsa.vercel.app/guest/product-category/${id}`
   );
   return data;
 };

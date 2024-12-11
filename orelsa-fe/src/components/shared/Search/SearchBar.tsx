@@ -13,7 +13,7 @@ const SearchBar = () => {
 
   const fetchSearchData = async (query: string) => {
     if (!query) return;
-    const url = `http://localhost:9089/guest/search?name=${query}`;
+    const url = `https://orelsa.vercel.app/guest/search?name=${query}`;
     try {
       const { data } = await axios.get(url);
       setSearchResults(data);

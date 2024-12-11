@@ -6,8 +6,8 @@ const BASE_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL + "/admin/dashboard/homeNewCollection";
 const BASE_URL_SUPPORT =
   process.env.NEXT_PUBLIC_BACKEND_URL + "/admin/dashboard/";
-const ADMIN_BE_URL = "http://localhost:9089/admin";
-const GUEST_BE_URL = "http://localhost:9089/guest";
+const ADMIN_BE_URL = "https://orelsa.vercel.app/admin";
+const GUEST_BE_URL = "https://orelsa.vercel.app/guest";
 // API
 
 type ContactDetails = {
@@ -122,7 +122,7 @@ export const getAdminDashboardHomeNewCollectionById = async (id: string) => {
 };
 
 export const getAllProductsAdmin = async () => {
-  const url = "http://localhost:9089/admin/dashboard/product";
+  const url = "https://orelsa.vercel.app/admin/dashboard/product";
 
   try {
     const { data } = await axios.get(url, {
@@ -143,7 +143,7 @@ export const getAllProductsAdmin = async () => {
 
 export const deleteProduct = async (productId: string) => {
   const token = localStorage.getItem("token");
-  const url = "http://localhost:9089/admin/dashboard/product";
+  const url = "https://orelsa.vercel.app/admin/dashboard/product";
 
   try {
     const response = await axios.delete(`${url}/${productId}`, {
@@ -159,7 +159,7 @@ export const deleteProduct = async (productId: string) => {
 };
 
 export const getHomeNewCollection = async () => {
-  const url = "http://localhost:9089/admin/dashboard/homeNewCollection";
+  const url = "https://orelsa.vercel.app/admin/dashboard/homeNewCollection";
 
   const { data } = await axios.get(url, {
     headers: {
@@ -185,7 +185,7 @@ export const updateNewCollection = async (editingNewCollection: any) => {
 
 export const deleteNewCollection = async (productId: string) => {
   const token = localStorage.getItem("token");
-  const url = "http://localhost:9089/admin/dashboard/homeNewCollection";
+  const url = "https://orelsa.vercel.app/admin/dashboard/homeNewCollection";
 
   try {
     const response = await axios.delete(`${url}/${productId}`, {
@@ -201,7 +201,7 @@ export const deleteNewCollection = async (productId: string) => {
 };
 
 export const getContactList = async () => {
-  const url = "http://localhost:9089/admin/dashboard/contact";
+  const url = "https://orelsa.vercel.app/admin/dashboard/contact";
 
   const { data } = await axios.get(url, {
     headers: {
@@ -212,7 +212,7 @@ export const getContactList = async () => {
 };
 
 export const getSubscribersList = async () => {
-  const url = "http://localhost:9089/admin/dashboard/subscribe";
+  const url = "https://orelsa.vercel.app/admin/dashboard/subscribe";
 
   const { data } = await axios.get(url, {
     headers: {
@@ -223,7 +223,7 @@ export const getSubscribersList = async () => {
 };
 
 export const getBrowseRangeList = async () => {
-  const url = "http://localhost:9089/admin/dashboard/homeBrowseRange";
+  const url = "https://orelsa.vercel.app/admin/dashboard/homeBrowseRange";
 
   const { data } = await axios.get(url, {
     headers: {
@@ -242,7 +242,7 @@ export const getBrowseRangeList = async () => {
 
 export const deleteHomeBrowseRange = async (productId: string) => {
   const token = localStorage.getItem("token");
-  const url = "http://localhost:9089/admin/dashboard/homeBrowseRange";
+  const url = "https://orelsa.vercel.app/admin/dashboard/homeBrowseRange";
 
   try {
     const response = await axios.delete(`${url}/${productId}`, {

@@ -17,7 +17,7 @@ const ShopRooms = ({
 
   useEffect(() => {
     const getProductsList = async () => {
-      const url = "http://localhost:9089/guest/product";
+      const url = "https://orelsa.vercel.app/guest/product";
 
       try {
         const { data } = await axios.get(url, {

@@ -43,7 +43,7 @@ const AdminAddNewCollection: React.FC<{
 
       try {
         await axios.post(
-          "http://localhost:9089/admin/dashboard/homeNewCollection",
+          "https://orelsa.vercel.app/admin/dashboard/homeNewCollection",
           formData,
           {
             headers: {

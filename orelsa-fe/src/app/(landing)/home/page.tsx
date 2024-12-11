@@ -8,7 +8,7 @@ import axios from "axios";
 
 export default async function HomePage() {
   const { data } = await axios.get(
-    "http://localhost:9089/guest/homeNewCollection"
+    "https://orelsa.vercel.app/guest/homeNewCollection"
   );
 
   const backgroundImage = data[0]?.newproductPhoto

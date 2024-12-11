@@ -56,7 +56,7 @@ const AdminNewProduct: React.FC<{
 
       try {
         await axios.post(
-          "http://localhost:9089/admin/dashboard/product",
+          "https://orelsa.vercel.app/admin/dashboard/product",
           formData,
           {
             headers: {
