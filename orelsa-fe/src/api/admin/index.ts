@@ -2,10 +2,10 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 import toast from "react-hot-toast";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL + "/admin/dashboard/homeNewCollection";
-const BASE_URL_SUPPORT =
-  process.env.NEXT_PUBLIC_BACKEND_URL + "/admin/dashboard/";
+// const BASE_URL =
+//   process.env.NEXT_PUBLIC_BACKEND_URL + "/admin/dashboard/homeNewCollection";
+// const BASE_URL_SUPPORT =
+//   process.env.NEXT_PUBLIC_BACKEND_URL + "/admin/dashboard/";
 const ADMIN_BE_URL = "https://orelsa.vercel.app/admin";
 const GUEST_BE_URL = "https://orelsa.vercel.app/guest";
 // API
@@ -22,7 +22,7 @@ type Subscribe = {
 };
 
 export const postAdminDashboardHomeNewCollection = async () => {
-  const { data } = await axios.post(BASE_URL + "homeNewCollection/");
+  const { data } = await axios.post(ADMIN_BE_URL + "/dashboard/homeNewCollection");
   return data;
 };
 
@@ -85,7 +85,7 @@ export const updateProduct = async (editingProduct: any) => {
 
 export const getAdminDashboardHomeNewCollection = async (id: string) => {
   const session = await getServerSession();
-  const { data } = await axios.get(BASE_URL + "homeNewCollection/" + id, {
+  const { data } = await axios.get(ADMIN_BE_URL + "/dashboard/homeNewCollection/" + id, {
     headers: {
       Authorization: "Bearer " + session?.user?.email,
     },
@@ -117,7 +117,7 @@ export const getAdminDashboardHomeNewCollection = async (id: string) => {
 // };
 
 export const getAdminDashboardHomeNewCollectionById = async (id: string) => {
-  const { data } = await axios.get(BASE_URL + "homeNewCollection/" + id);
+  const { data } = await axios.get(ADMIN_BE_URL + "/dashboard/homeNewCollection/" + id);
   return data;
 };
 
