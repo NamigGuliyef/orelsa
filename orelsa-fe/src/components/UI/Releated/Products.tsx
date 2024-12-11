@@ -24,7 +24,7 @@ const RelatedProducts = ({ relatedProducts }: RelatedProducts) => {
       <LandingContainer>
         <div className=" w-full h-full ">
           <div className=" flex justify-center items-center mb-6">
-            <h3 className="font-medium text-4xl">Related Products</h3>
+            <h3 className="font-medium text-4xl">Oxşar məhsullar</h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">

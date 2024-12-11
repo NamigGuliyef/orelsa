@@ -161,15 +161,18 @@ export class AdminService {
           from: 'orelsacosmetics@gmail.com',
           to: `${subscribe[i].email}`,
           subject: "Orelsa cosmetics - yeni məhsul bildirişi",
-          html: `<h4>Məhsul adı : ${CreateProduct.name}</h4><br>
-                 <h4>Məhsul haqqında: ${CreateProduct.description}</h4><br>
-                 <h4>Məhsul kateqoriyası : ${CreateProduct.category}</h4><br>
-                 <h4>Məhsul qiyməti : ${CreateProduct.price} AZN</h4><br>
-                 <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
-                 <img src="${productPhotos[1]}" alt="Məhsul şəkli" width="200" height="200"/>
-                 <h2>Sayta keçid: orelsacosmetics.az</h2><br>
-                 <h2>Bizimlə əlaqə: +994559706747</h2>
-                 `
+          html: `
+                <div style="font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #2a9d8f;">Məhsul adı : ${CreateProduct.name}</h4><br>
+                    <h4 style="color: #2a9d8f;">Məhsul haqqında: ${CreateProduct.description}</h4><br>
+                    <h4 style="color: #2a9d8f;">Məhsul kateqoriyası : ${CreateProduct.category}</h4><br>
+                    <h4 style="color: #e63946;">Məhsul qiyməti : ${CreateProduct.price} AZN</h4><br>
+                    <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200" style="border: 2px solid #2a9d8f; border-radius: 10px; margin-top: 10px;" />
+                    <h2 style="color: #e63946;"><a href="https://www.instagram.com/orelsa_cosmetics/" style="text-decoration: none; color: #264653;">İnstagram: @orelsa_cosmetics</a></h2><br>
+                    <h2 style="color: #e63946;"><a href="https://orelsacosmetics.az" style="text-decoration: none; color: #264653;">Sayta keçid: orelsacosmetics.az</a></h2><br>
+                    <h2 style="color: #e63946;">Bizimlə əlaqə: <a href="tel:+994559706747" style="text-decoration: none; color: #2a9d8f;">+994 55 970 67 47</a></h2>
+                </div>
+                `
         })
       }
 
@@ -212,7 +215,7 @@ export class AdminService {
                  <h4>Məhsul qiyməti : ${UpdateProduct.price} AZN</h4><br>
                  <h4>Məhsul endirim qiyməti : ${discountPrice} AZN</h4><br>
                  <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
-                 <img src="${productPhotos[1]}" alt="Məhsul şəkli" width="200" height="200"/>
+                 <h2>İnstagram:  https://www.instagram.com/orelsa_cosmetics/</h2><br>
                  <h2>Sayta keçid: orelsacosmetics.az</h2><br>
                  <h2>Bizimlə əlaqə: +994559706747</h2>
                  `
