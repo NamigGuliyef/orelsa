@@ -50,7 +50,11 @@ const NewCollectionTable = () => {
     fetchProducts();
   }, []);
 
-  const handleChange = (id: string, key: keyof INewCollection, value: any) => {
+  const handleChange = <K extends keyof INewCollection>(
+    id: string,
+    key: K,
+    value: INewCollection[K]
+  ) => {
     const updatedProducts = newCollection.map((product) => {
       if (product._id === id) {
         product[key] = value;
@@ -59,6 +63,7 @@ const NewCollectionTable = () => {
     });
     setNewCollection(updatedProducts);
   };
+  
 
   const onSubmit = async (index: number) => {
     const productToUpdate = {
