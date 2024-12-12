@@ -14,11 +14,10 @@ const ShopRooms = ({
   onSendData: (num: number) => void;
 }) => {
   const [products, setProducts] = useState<ProductDetail[]>([]);
-
   useEffect(() => {
     const getProductsList = async () => {
       const url = "https://orelsa.vercel.app/guest/product";
-
+  
       try {
         const { data } = await axios.get(url, {
           headers: {
@@ -31,9 +30,10 @@ const ShopRooms = ({
         console.error("Error fetching products:", error);
       }
     };
+  
     getProductsList();
-  }, []);
-
+  }, [onSendData]);  // Dependency array-ə onSendData daxil edin
+  
   return (
     <section>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mt-10 pb-3">
