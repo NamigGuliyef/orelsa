@@ -1,3 +1,4 @@
+// app/(landing)/home/page.tsx
 import HomePageImg from "@/../public/HomePage/HomePageImg.svg";
 import OurProducts from "@/components/UI/OurProducts/OurProducts";
 import Rooms from "@/components/UI/Rooms/Rooms";
@@ -7,8 +8,8 @@ import { Button } from "@nextui-org/react";
 import axios from "axios";
 
 export default async function HomePage() {
-  // SSR üçün məlumatı birbaşa buradan gətiririk
   let data = [];
+  
   try {
     const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
     data = response.data;
@@ -24,7 +25,7 @@ export default async function HomePage() {
     <>
       <main
         className="bg-no-repeat bg-cover h-screen flex justify-end items-center"
-        style={{ backgroundImage: `${backgroundImage}` }}
+        style={{ backgroundImage: backgroundImage }}
       >
         <div className="w-full md:w-[90%] lg:w-[60%] xl:w-[50%] shadow-2xl bg-white bg-opacity-40 rounded-[16px] px-6 py-8 mx-5">
           <h2 className="ml-0 md:ml-11 mt-4 font-bold text-[32px] sm:text-[42px] lg:text-[52px] text-[#B88E2F]">
