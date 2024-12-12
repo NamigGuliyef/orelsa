@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default async function HomePage() {
   let data = [];
-  
+
   try {
     const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
     data = response.data;
@@ -17,9 +17,14 @@ export default async function HomePage() {
     console.error("Error fetching data:", error);
   }
 
-  const backgroundImage = data[0]?.newproductPhoto
-    ? `url(${data[0].newproductPhoto})`
-    : `url(${HomePageImg.src})`;
+  let backgroundImage;
+  if (data[0]?.newproductPhoto) {
+    backgroundImage = `url(${data[0].newproductPhoto})?v=${new Date().getTime()}`; // Cache bypass
+  } else {
+    backgroundImage = `url(${HomePageImg.src})`;
+  }
+  console.log(HomePageImg.src);
+  console.log(backgroundImage);
 
   return (
     <>
