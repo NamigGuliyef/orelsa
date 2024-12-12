@@ -17,14 +17,9 @@ export default async function HomePage() {
     console.error("Error fetching data:", error);
   }
 
-  let backgroundImage;
-  if (data[0]?.newproductPhoto) {
-    backgroundImage = `url(${data[0].newproductPhoto})?v=${new Date().getTime()}`; // Cache bypass
-  } else {
-    backgroundImage = `url(${HomePageImg.src})`;
-  }
-  console.log(HomePageImg.src);
-  console.log(backgroundImage);
+  const backgroundImage = data[0].newproductPhoto
+    ? `url(${data[0].newproductPhoto})`
+    : `url(${HomePageImg.src})`;
 
   return (
     <>
