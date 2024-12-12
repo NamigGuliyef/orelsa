@@ -6,14 +6,16 @@ import Footer from "@/components/Views/Landing/Footer";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 
-export async function getServerSideProps() {
-  const { data } = await axios.get('https://orelsa.vercel.app/guest/homeNewCollection');
-  return {
-    props: { data },
-  };
-}
+export default async function HomePage() {
+  // SSR üçün məlumatı birbaşa buradan gətiririk
+  let data = [];
+  try {
+    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
+    data = response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 
-export default function HomePage({ data }: { data: any }) {
   const backgroundImage = data[0]?.newproductPhoto
     ? `url(${data[0].newproductPhoto})`
     : `url(${HomePageImg.src})`;
