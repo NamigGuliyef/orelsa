@@ -6,17 +6,18 @@ import Footer from "@/components/Views/Landing/Footer";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 
-const fetchData = async () => {
+export async function getServerSideProps() {
   const { data } = await axios.get('https://orelsa.vercel.app/guest/homeNewCollection');
-  return data;
-};
+  return {
+    props: { data },
+  };
+}
 
-export default async function HomePage() {
-    const data = await fetchData();
-
+export default function HomePage({ data }: { data: any }) {
   const backgroundImage = data[0]?.newproductPhoto
     ? `url(${data[0].newproductPhoto})`
     : `url(${HomePageImg.src})`;
+
   return (
     <>
       <main
@@ -44,4 +45,3 @@ export default async function HomePage() {
     </>
   );
 }
-export const revalidate = 10;
