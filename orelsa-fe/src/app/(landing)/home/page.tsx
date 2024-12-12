@@ -10,7 +10,9 @@ export default async function HomePage() {
   // SSR üçün məlumatı birbaşa buradan gətiririk
   let data = [];
   try {
-    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
+    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection", {
+      timeout: 5000, // 5 saniyə gözləmə
+    });
     data = response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
