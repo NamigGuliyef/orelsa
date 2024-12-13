@@ -7,21 +7,35 @@ import Footer from "@/components/Views/Landing/Footer";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 
-export default async function HomePage() {
-  let data = [];
+interface Product {
+  _id: string;
+  title: string;
+  description: string;
+  newproductPhoto: string;
+  active: boolean;
+}
+
+export async function getStaticProps() {
+  let data:Product[] = [];
 
   try {
-    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection", {
-      headers: {
-        "Cache-Control": "no-cache",
-        Pragma: "no-cache",
-      },
-    });
+    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
     data = response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 
+  return {
+    props: { data },
+    revalidate: 10, // Hər 10 saniyədən bir məlumatı yeniləyəcək
+  };
+}
+
+interface HomePageProps {
+  data: Product[];
+}
+
+export default function HomePage({ data }: HomePageProps) {
   const backgroundImage = data[0]?.newproductPhoto
     ? `url(${data[0].newproductPhoto})`
     : `url(${HomePageImg.src})`;
@@ -30,7 +44,7 @@ export default async function HomePage() {
     <>
       <main
         className="bg-no-repeat bg-cover h-screen flex justify-end items-center"
-        style={{ backgroundImage: backgroundImage }}
+        style={{ backgroundImage }}
       >
         <div className="w-full md:w-[90%] lg:w-[60%] xl:w-[50%] shadow-2xl bg-white bg-opacity-40 rounded-[16px] px-6 py-8 mx-5">
           <h2 className="ml-0 md:ml-11 mt-4 font-bold text-[32px] sm:text-[42px] lg:text-[52px] text-[#B88E2F]">
