@@ -1,23 +1,34 @@
-// app/(landing)/home/page.tsx
+"use client";
+
 import HomePageImg from "@/../public/HomePage/HomePageImg.svg";
 import OurProducts from "@/components/UI/OurProducts/OurProducts";
 import Rooms from "@/components/UI/Rooms/Rooms";
 import TheRange from "@/components/UI/TheRange/TheRange";
 import Footer from "@/components/Views/Landing/Footer";
 import { Button } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default async function HomePage() {
-  let data = [];
+export default function HomePage() {
+  const [data, setData] = useState<any[]>([]); // Məlumatları saxlamaq üçün state
 
-  try {
-    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
-    data = response.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
+  useEffect(() => {
+    // Məlumatları dinamik olaraq backend-dən alırıq
+    const fetchHomeData = async () => {
+      try {
+        const response = await axios.get(
+          "https://orelsa.vercel.app/guest/homeNewCollection"
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const backgroundImage = data[0].newproductPhoto
+    fetchHomeData();
+  }, []); // useEffect yalnız komponent ilk dəfə mount olduqda işləyəcək
+
+  const backgroundImage = data[0]?.newproductPhoto
     ? `url(${data[0].newproductPhoto})`
     : `url(${HomePageImg.src})`;
 
