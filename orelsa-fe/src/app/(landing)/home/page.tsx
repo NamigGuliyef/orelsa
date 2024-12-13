@@ -13,7 +13,10 @@ interface Product {
   description: string;
   newproductPhoto: string;
   active: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
+
 
 export async function getStaticProps() {
   let data:Product[] = [];
