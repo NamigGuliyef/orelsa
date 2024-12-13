@@ -11,13 +11,18 @@ export default async function HomePage() {
   let data = [];
 
   try {
-    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection");
+    const response = await axios.get("https://orelsa.vercel.app/guest/homeNewCollection", {
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+      },
+    });
     data = response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 
-  const backgroundImage = data[0].newproductPhoto
+  const backgroundImage = data[0]?.newproductPhoto
     ? `url(${data[0].newproductPhoto})`
     : `url(${HomePageImg.src})`;
 
