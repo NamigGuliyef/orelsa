@@ -5,10 +5,14 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin:"https://orelsa-fe.vercel.app",
-    methods: 'GET,POST,PUT,PATCH,DELETE', 
-    credentials: true,
+    origin: ['http://localhost:3000', 'https://orelsa-fe.vercel.app'],
+    methods: 'GET,POST,PUT,PATCH,DELETE',
   })
+  // app.enableCors({
+  //   origin:"http://localhost:3000",
+  //   methods: 'GET,POST,PUT,PATCH,DELETE', 
+  //   credentials: true,
+  // })
 
   const config = new DocumentBuilder()
     .setTitle('ORELSA.AZ')
