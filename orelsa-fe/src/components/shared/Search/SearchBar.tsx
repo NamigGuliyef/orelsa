@@ -10,6 +10,7 @@ import { CiSearch } from "react-icons/ci";
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<IProductById[]>([]);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
 
   const fetchSearchData = async (query: string) => {
     if (!query) return;
@@ -36,53 +37,78 @@ const SearchBar = () => {
   }, [searchQuery]);
 
   return (
-    <div className="relative search-bar-classname-unique">
-      <form
-        className={cn(
-          "transition-all duration-300 ease-in-out w-full sm:w-[280px] lg:w-[350px] xl:w-[400px] 2xl:w-[450px]"
-        )}
-      >
-        <div className="relative pt-5">
-          <input
-            type="search"
-            placeholder="Axtarış"
-            className="w-full focus-visible:outline-none outline-none h-full p-4 rounded-full border border-gray-300 transition-all duration-200 ease-in-out"
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-          />
-        </div>
-        {searchQuery && (
-          <div className="absolute top-18 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-lg p-2 z-50 w-full max-w-[400px]">
-            {searchResults.length > 0 ? (
-              searchResults.map((result) => (
-                <Link
-                  href={`/products/${result._id}`}
-                  key={result._id}
-                  className="flex items-center gap-2 block p-2 hover:bg-[#FCF8F3] rounded transition duration-200"
-                  onClick={() => {
-                    setSearchQuery("");
-                  }}
-                >
-                  {result.photos && result.photos[0] && (
-                    <img
-                      src={result.photos[0]}
-                      alt={result.name}
-                      className="w-10 h-10 rounded object-cover"
-                    />
-                  )}
-                  <div className="flex flex-col">
-                    <span className="font-medium">{result.name}</span>
-                    <span className="text-sm text-gray-500">{result.price} AZN</span>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <div className="p-2 text-gray-500">Məhsul tapılmadı ❌</div>
-            )}
-          </div>
-        )}
+    <div className="relative">
+      {/* Lupa düyməsi */}
+      {!isSearchVisible && (
+        <button
+          className="p-2 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-200 text-white"
+          onClick={() => setIsSearchVisible(true)}
+        >
+          <CiSearch size={20} />
+        </button>
+      )}
 
-      </form>
+      {/* Axtarış Input */}
+      {isSearchVisible && (
+        <form
+          className={cn(
+            "transition-all duration-300 ease-in-out w-full sm:w-[240px] lg:w-[300px] xl:w-[350px] 2xl:w-[380px]" // Uzunluğu azaltdım
+          )}
+        >
+          <div className="relative pt-3">
+            <input
+              type="search"
+              placeholder="Axtarış"
+              className="w-full focus-visible:outline-none outline-none h-[40px] p-2 rounded-lg border border-gray-300 transition-all duration-200 ease-in-out" // Hündürlüyü və padding-i azaltdım
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
+            {/* Inputu bağlamaq üçün düymə */}
+            <button
+              type="button"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800"
+              onClick={() => {
+                setIsSearchVisible(false);
+                setSearchQuery("");
+              }}
+            >
+              ✖
+            </button>
+          </div>
+
+          {searchQuery && (
+            <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-lg p-1 z-50 w-full max-w-[350px]"> {/* Nəticə blokunun ölçüsünü azaltdım */}
+              {searchResults.length > 0 ? (
+                searchResults.map((result) => (
+                  <Link
+                    href={`/products/${result._id}`}
+                    key={result._id}
+                    className="flex items-center gap-2 block p-1 hover:bg-[#FCF8F3] rounded transition duration-200"
+                    onClick={() => {
+                      setSearchQuery("");
+                      setIsSearchVisible(false);
+                    }}
+                  >
+                    {result.photos && result.photos[0] && (
+                      <img
+                        src={result.photos[0]}
+                        alt={result.name}
+                        className="w-8 h-8 rounded object-cover" // Şəkillərin ölçüsünü azaltdım
+                      />
+                    )}
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">{result.name}</span>
+                      <span className="text-xs text-gray-500">{result.price} AZN</span>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <div className="p-1 text-gray-500 text-sm">Məhsul tapılmadı ❌</div>
+              )}
+            </div>
+          )}
+        </form>
+      )}
     </div>
   );
 };
