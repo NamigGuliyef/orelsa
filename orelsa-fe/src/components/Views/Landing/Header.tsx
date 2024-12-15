@@ -26,12 +26,25 @@ const Header: FC = () => {
         <nav className="flex justify-between items-center w-full max-w-[1280px] mx-auto relative bg-transparent gap-3">
           <div className="flex justify-start items-center space-x-4" id="logo">
             <Link href="/" className="cursor-pointer flex items-center gap-2">
-              <Image
-                src="/NavbarLogo/LogoIcon.svg"
-                alt="icon"
-                width={50}
-                height={32}
-              />
+              <div className="relative inline-block w-[50px] h-[32px]">
+                {/* Loqo */}
+                <Image
+                  src="/NavbarLogo/LogoIcon.svg"
+                  alt="icon"
+                  width={50}
+                  height={32}
+                  className="relative"
+                />
+
+                {/* Şaxta Baba Papağı */}
+                <Image
+                  src="/HomePage/santa-hat.png" // Şaxta Baba papağı şəklinizin yeri
+                  alt="Santa Hat"
+                  width={35} // Kiçik ölçü üçün
+                  height={35}
+                  className="absolute -top-4 left-3.5 opacity-100" // Mövqeyi və transparanlıq
+                />
+              </div>
               <h1 className="font-bold text-4xl text-black hidden md:block">
                 ORELSA
               </h1>
@@ -57,18 +70,18 @@ const Header: FC = () => {
               <SearchBar />
             </div>
 
-          <button
-            className="lg:hidden flex items-center text-center"
-            onClick={toggle}
-          >
-            {state ? (
-              <IoCloseCircle size={30} />
-            ) : (
-              <GiHamburgerMenu size={30} />
-            )}
-          </button>
+            <button
+              className="lg:hidden flex items-center text-center"
+              onClick={toggle}
+            >
+              {state ? (
+                <IoCloseCircle size={30} />
+              ) : (
+                <GiHamburgerMenu size={30} />
+              )}
+            </button>
 
-          {state && (
+            {state && (
               <div className="absolute top-40 right-2 w-35 z-30 bg-transparent shadow-lg">
                 <ul className="flex flex-col items-start space-y-4 p-4">
                   {navLinks.map((link) => (
@@ -85,7 +98,7 @@ const Header: FC = () => {
                 </ul>
               </div>
             )}
-            </div> 
+          </div>
         </nav>
       </LandingContainer>
     </header>

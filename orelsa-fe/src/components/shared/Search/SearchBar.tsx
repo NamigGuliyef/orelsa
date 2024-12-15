@@ -53,24 +53,35 @@ const SearchBar = () => {
         </div>
         {searchQuery && (
           <div className="absolute top-18 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-lg p-2 z-50 w-full max-w-[400px]">
-            {searchResults.length > 0
-              ? searchResults.map((result) => (
-                  <Link
-                    href={`/products/${result._id}`}
-                    key={result._id}
-                    className="block p-2 hover:bg-[#FCF8F3] rounded transition duration-200 "
-                    onClick={() => {
-                      setSearchQuery("");
-                    }}
-                  >
-                    {result.name}
-                  </Link>
-                ))
-              : searchQuery && (
-                  <div className="p-2 text-gray-500">Məhsul tapılmadı ❌</div>
-                )}
+            {searchResults.length > 0 ? (
+              searchResults.map((result) => (
+                <Link
+                  href={`/products/${result._id}`}
+                  key={result._id}
+                  className="flex items-center gap-2 block p-2 hover:bg-[#FCF8F3] rounded transition duration-200"
+                  onClick={() => {
+                    setSearchQuery("");
+                  }}
+                >
+                  {result.photos && result.photos[0] && (
+                    <img
+                      src={result.photos[0]}
+                      alt={result.name}
+                      className="w-10 h-10 rounded object-cover"
+                    />
+                  )}
+                  <div className="flex flex-col">
+                    <span className="font-medium">{result.name}</span>
+                    <span className="text-sm text-gray-500">{result.price} AZN</span>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="p-2 text-gray-500">Məhsul tapılmadı ❌</div>
+            )}
           </div>
         )}
+
       </form>
     </div>
   );
