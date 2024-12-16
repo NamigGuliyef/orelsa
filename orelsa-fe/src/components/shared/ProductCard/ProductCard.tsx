@@ -14,53 +14,46 @@ const ProductCard = ({
   return (
     <div
       key={_id}
-      className="relative flex flex-col justify-center items-center border rounded-lg w-full h-auto mb-6 group hover:shadow-xl "
+      className="relative flex flex-col items-center bg-[#F9F1E7] border rounded-[20px] w-full max-w-[300px] h-auto p-4 shadow-lg hover:shadow-2xl transition duration-300 group"
     >
-      <div className="absolute flex justify-center items-center opacity-0 inset-0 z-50 transition duration-300 ease-in-out group-hover:bg-black/70 group-hover:opacity-100">
-        <Link
-          href={`/products/${_id}`}
-          className="bg-white w-[60%] text-xl text-[#B88E2F] py-3 rounded duration-300 ease-in-out text-center"
-        >
-          Ətraflı bax
-        </Link>
+      {/* Yeni Ürək İkonu */}
+      <div className="absolute top-4 right-4 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md">
+        <span className="text-[#E97171] text-lg font-bold">❤</span>
       </div>
 
-      <div className="relative w-full h-full overflow-hidden rounded">
+      {/* Məhsul Şəkli */}
+      <div className="relative w-full h-40 mb-4 overflow-hidden rounded-lg">
         <Image
           src={photos?.[0]}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
           width={300}
-          height={300}
+          height={160}
         />
+        {/* "NEW" və ya Endirim Faizi */}
+        {discount > 0 ? (
+          <div className="absolute top-2 left-2 bg-[#E97171] text-white text-xs px-2 py-1 rounded-full">
+            -{discount}%
+          </div>
+        ) : (
+          <div className="absolute top-2 left-2 bg-[#2EC1AC] text-white text-xs px-2 py-1 rounded-full">
+            NEW
+          </div>
+        )}
       </div>
 
-      <div className="bg-[#F4F5F7] w-full h-max pb-4 pl-4 pr-4">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold">{name}</h2>
-        <p className="text-sm sm:text-base text-[#B0B0B0]">{description}</p>
-        <div className="flex flex-col justify-between w-full gap-2 mt-2">
-          <p className="text-lg sm:text-xl font-semibold text-[#B0B0B0]">
-            {discount_price} AZN
-          </p>
+      {/* Məhsul Adı */}
+      <h2 className="text-lg font-bold text-[#3A3A3A] mb-2">{name}</h2>
 
-          {discount !== 0 ? (
-            <p className="text-lg sm:text-xl font-bold text-[#B0B0B0] line-through mb-2">
-              {price} <span>AZN</span>
-            </p>
-          ) : (
-            <div className="h-[35px]"></div>
-          )}
+      {/* Məhsul Açıqlaması */}
+      <p className="text-sm text-[#898989] text-center mb-2">{description}</p>
 
-          <div className="flex justify-center items-center w-[40px] h-[40px] rounded-full bg-[#E97171] text-white absolute top-[24px] right-4 sm:w-[50px] sm:h-[50px] sm:right-6">
-            {discount > 0 ? (
-              <p className="text-sm sm:text-base">{discount}%</p>
-            ) : (
-              <div className="flex justify-center items-center w-full h-full bg-[#2EC1AC] rounded-full">
-                <p className="text-sm sm:text-base">New</p>
-              </div>
-            )}
-          </div>
-        </div>
+      {/* Qiymət Sahəsi */}
+      <div className="flex justify-between items-center w-full">
+        <p className="text-lg font-semibold text-[#E97171]">{discount_price || price} AZN</p>
+        {discount > 0 && (
+          <p className="text-sm text-gray-400 line-through">{price} AZN</p>
+        )}
       </div>
     </div>
   );
