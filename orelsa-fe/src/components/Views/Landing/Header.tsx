@@ -75,29 +75,29 @@ const Header: FC = () => {
               onClick={toggle}
             >
               {state ? (
-                <IoCloseCircle size={30} />
+                <IoCloseCircle size={35} />
               ) : (
-                <GiHamburgerMenu size={30} />
+                <GiHamburgerMenu size={35} />
               )}
             </button>
 
             {state && (
-              <div className="absolute top-40 right-2 w-35 z-30 bg-transparent shadow-lg">
-                <ul className="flex flex-col items-start space-y-4 p-4">
-                  {navLinks.map((link) => (
-                    <li key={link.id}>
-                      <Link
-                        href={link.link}
-                        className="text-black font-medium text-base hover:text-primary transition duration-200"
-                        onClick={setFalse}
-                      >
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+  <div className="absolute top-full left-30 w-50 bg-white/70 backdrop-blur-md shadow-lg z-30 lg:hidden">
+    <ul className="flex flex-col items-start space-y-4 p-4">
+      {navLinks.map((link) => (
+        <li key={link.id} className="w-full">
+          <Link
+            href={link.link}
+            className="text-black font-medium text-base hover:text-primary transition duration-200 block w-full"
+            onClick={setFalse}
+          >
+            {link.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
           </div>
         </nav>
       </LandingContainer>
