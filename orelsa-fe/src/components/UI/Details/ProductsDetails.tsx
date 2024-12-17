@@ -56,9 +56,11 @@ const ProductsDetails = ({
             id="second-part"
             className="flex flex-col sm:items-start items-center w-full sm:w-auto"
           >
-            <div className="py-4 bg-red text-center sm:text-center">
-              <h2 className="font-normal text-4xl py-4 text-green-500">{name}</h2>
-              <p className="font-normal text-sm sm:w-[50ch] w-[90%] mt-6">
+            <div className=" bg-red text-center sm:text-center ">
+              <h2 className="font-normal text-4xl text-green-500">
+                {name}
+              </h2>
+              <p className="font-normal text-lg sm:w-[18ch] w-[90%] mt-6">
                 {description}
               </p>
               <p className="font-medium text-2xl text-red-500 my-6">
@@ -66,8 +68,9 @@ const ProductsDetails = ({
               </p>
             </div>
 
-            <div className="flex pt-20 pb-40 justify-center sm:justify-start">
-              <Button className="w-56 h-[75px] bg-[#B88E2F] font-bold text-white text-base transform hover:translate-x-2"
+            <div className="flex justify-center py-10">
+              <Button
+                className="w-56 h-[75px] bg-[#B88E2F] font-bold text-white text-base transform hover:translate-x-2"
                 onClick={() => {
                   window.open("https://wa.me/+994559706747", "_blank");
                 }}
@@ -77,7 +80,7 @@ const ProductsDetails = ({
             </div>
 
             <hr />
-            <div className="flex flex-col w-full pt-10">
+            <div className="flex flex-col w-full  items-center md:items-start text-center">
               <div className="flex gap-3">
                 <p className="pr-10 font-normal text-base text-[#9F9F9F]">
                   Model
@@ -89,7 +92,7 @@ const ProductsDetails = ({
                   {model_no}
                 </p>
               </div>
-              <div className="flex">
+              <div className="flex items-center text-left">
                 <p className="pr-7 font-normal text-base text-[#9F9F9F]">
                   Category
                 </p>
