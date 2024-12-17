@@ -6,20 +6,18 @@ import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { AiOutlineInstagram, AiOutlineTikTok } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
+import { AiFillTwitterCircle } from "react-icons/ai";
+import { FaFacebook, FaLinkedinIn } from "react-icons/fa";
 
 const ProductsDetails = ({
   _id,
   name,
   description,
   price,
-  discount_price,
   photos,
   category,
   model_no,
-  discount,
-}: IProductById & { discount_price: number; discount: number }) => {
+}: IProductById) => {
   const [selectedImage, setSelectedImage] = useState(photos?.[0] ?? "");
 
   const handleImageOnClick = (imageSrc: string) => {
@@ -27,49 +25,39 @@ const ProductsDetails = ({
   };
 
   return (
-    <section className="bg-white py-0">
+    <section>
       <LandingContainer>
-        {/* Sol Bölmə */}
-        <div className="flex gap-0 relative">
-          <div className="flex flex-col gap-2">
-            {photos?.map((src: string, index: number) => (
-              <Image
-                key={index}
-                src={src}
-                alt="thumbnail"
-                width={100}
-                height={100}
-                className={`cursor-pointer rounded-md ${
-                  selectedImage === src ? "ring-2 ring-green-500" : ""
-                }`}
-                onClick={() => handleImageOnClick(src)}
-              />
-            ))}
+        <div className="py-10 w-full flex flex-wrap items-start gap-10">
+          <div className="flex gap-3 flex-row md:flex-col">
+            {photos?.map((src: string, index: number) => {
+              return (
+                <Image
+                  key={index}
+                  src={src}
+                  alt="image"
+                  width={76}
+                  height={80}
+                  className="bg-cover bg-no-repeat cursor-pointer"
+                  onClick={() => handleImageOnClick(src)}
+                />
+              );
+            })}
           </div>
-
-          <div id="main-photo" className="relative flex justify-center w-full">
+          <div id="main-photo" className="flex justify-center w-full sm:w-auto">
             <Image
               src={selectedImage}
               alt="main"
-              width={500}
+              width={480}
               height={500}
-              className="bg-cover bg-no-repeat rounded-md"
+              className="bg-cover bg-no-repeat border-none w-full sm:w-[480px] sm:h-[500px] h-auto max-w-[480px]"
             />
-            {/* Endirim Faizi yalnız əsas şəkilin üzərində */}
-            {discount > 0 && (
-              <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 text-lg font-bold rounded-full shadow-lg">
-                -{discount}%
-              </div>
-            )}
           </div>
           <div
             id="second-part"
             className="flex flex-col sm:items-start items-center w-full sm:w-auto"
           >
             <div className=" bg-red text-center sm:text-center ">
-              <h2 className="font-normal text-4xl text-green-500">
-                {name}
-              </h2>
+              <h2 className="font-normal text-4xl text-green-500">{name}</h2>
               <p className="font-normal text-lg sm:w-[18ch] w-[90%] mt-6">
                 {description}
               </p>
@@ -78,7 +66,7 @@ const ProductsDetails = ({
               </p>
             </div>
 
-            <div className="flex justify-center py-10">
+            <div className="flex justify-center pt-10 pb-10">
               <Button
                 className="w-56 h-[75px] bg-[#B88E2F] font-bold text-white text-base transform hover:translate-x-2"
                 onClick={() => {
@@ -114,25 +102,22 @@ const ProductsDetails = ({
                 </p>
               </div>
             </div>
-            <div className="flex gap-2 text-gray-500 text-sm">
-              <p>Category:</p>
-              <span className="text-gray-800">{category}</span>
-            </div>
-          </div>
-
-          {/* Sosial Şəbəkələr */}
-          <div className="flex items-center gap-3 mt-10">
-            <h6 className="text-gray-500 text-sm">Follow us:</h6>
-            <div className="flex gap-4 text-xl">
-              <Link href="https://facebook.com" target="_blank">
-                <FaFacebook className="text-blue-600" />
-              </Link>
-              <Link href="https://tiktok.com" target="_blank">
-                <AiOutlineTikTok className="text-blue-800" />
-              </Link>
-              <Link href="https://instagram.com" target="_blank">
-                <AiOutlineInstagram className="text-red-400" />
-              </Link>
+            <div id="follow" className="flex gap-6 pt-14">
+              <h6 className="font-normal text-base text-[#9F9F9F]">
+                Follow us
+              </h6>
+              <span className="font-normal text-base text-[#9F9F9F]">:</span>
+              <div className="flex justify-between items-center gap-4">
+                <Link href="https://facebook.com">
+                  <FaFacebook />
+                </Link>
+                <Link href="https://linkedin.com">
+                  <FaLinkedinIn />
+                </Link>
+                <Link href="https://x.com">
+                  <AiFillTwitterCircle />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
