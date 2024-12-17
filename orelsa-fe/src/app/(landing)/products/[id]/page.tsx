@@ -13,7 +13,7 @@ interface IProps {
   };
 }
 
-export default async function ShopDetaiils({ params }: IProps) {
+export default async function ShopDetails({ params }: IProps) {
   const data = await getDetailsById(params.id);
   const related: IProduct[] = await getRelatedProductsById(params.id);
 
@@ -21,16 +21,22 @@ export default async function ShopDetaiils({ params }: IProps) {
     <main>
       <section className="bg-[#F9F1E7] ">
         <LandingContainer>
-          <div className="flex justify-between items-center gap-6 w-full relative">
-            <div className="flex justify-between items-center gap-6">
+          <div className="flex md:justify-between justify-center items-center gap-6  w-full relative">
+            <div className="flex justify-between items-center gap-0 md:gap-6 ">
               <div className="flex gap-4">
-                <Link href="/">Ana səhifə</Link>
-                <span className="font-bold">&gt;</span>
-              </div>
+                <div className="flex items-center gap-2">
+                  <Link href="/" className="text-sm sm:text-base">
+                    Ana səhifə
+                  </Link>
+                  <span className="font-bold">&gt;</span>
+                </div>
 
-              <div className="flex gap-4">
-                <Link href="/shop">Mağaza</Link>
-                <span className="font-bold">&gt;</span>
+                <div className="flex items-center gap-2">
+                  <Link href="/shop" className="text-sm sm:text-base">
+                    Mağaza
+                  </Link>
+                  <span className="font-bold">&gt;</span>
+                </div>
               </div>
 
               <div className="flex justify-between items-center gap-5 py-10">
