@@ -40,6 +40,22 @@ const ProductCard = ({
             NEW
           </div>
         )}
+        {/* Ətraflı Bax Göz Şəkili */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <Link
+            href={`/products/${_id}`}
+            className="w-12 h-12 bg-white flex items-center justify-center rounded-full shadow-lg text-[#B88E2F] hover:bg-[#B88E2F] hover:text-white transition duration-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+              className="w-6 h-6"
+            >
+              <path d="M8 3.5a5 5 0 0 1 4.546 2.916.5.5 0 0 1 0 .418A5 5 0 0 1 8 12.5a5 5 0 0 1-4.546-2.916.5.5 0 0 1 0-.418A5 5 0 0 1 8 3.5ZM8 2a6 6 0 0 0-5.472 3.466 1.5 1.5 0 0 0 0 1.068A6 6 0 0 0 8 14a6 6 0 0 0 5.472-3.466 1.5 1.5 0 0 0 0-1.068A6 6 0 0 0 8 2Zm0 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
+            </svg>
+          </Link>
+        </div>
       </div>
 
       {/* Məhsul Adı */}
