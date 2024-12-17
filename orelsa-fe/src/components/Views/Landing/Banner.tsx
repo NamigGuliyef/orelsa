@@ -3,7 +3,6 @@ import axios from "axios";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import HomePageImg from "@/../public/HomePage/HomePageImg.svg";
 
 const Banner = () => {
   const [newCollection, setNewCollection] = useState<any[]>([]);
@@ -20,20 +19,19 @@ const Banner = () => {
       });
   }, []);
 
-  const bgImage = newCollection[0]?.newproductPhoto || HomePageImg.src;
   return (
     <div
       className="bg-no-repeat bg-cover h-screen flex justify-end items-center"
       style={{
-        background: `url("${bgImage}") no-repeat center center/cover`,
+        background: `url("${newCollection[0]?.newproductPhoto}") no-repeat center center/cover`,
       }}
     >
       <div className="w-full md:w-[90%] lg:w-[60%] xl:w-[50%] shadow-2xl bg-white bg-opacity-40 rounded-[16px] px-6 py-8 mx-5">
         <h2 className="ml-0 md:ml-11 mt-4 font-bold text-[32px] sm:text-[42px] lg:text-[52px] text-[#B88E2F]">
-          {newCollection[0]?.title ?? "Yeni kolleksiya"}
+          {newCollection[0]?.title}
         </h2>
         <p className="ml-0 md:ml-11 text-black mt-6 sm:mt-9 text-base sm:text-lg font-medium text-wrap max-w-full sm:max-w-lg">
-          {newCollection[0]?.description ?? "Saç gücləndirici"}
+          {newCollection[0]?.description}
         </p>
         <div className="ml-0 md:ml-11 pb-6 sm:pb-10 pt-6 sm:pt-9">
           <Link href="https://wa.me/+994559706747" passHref>
