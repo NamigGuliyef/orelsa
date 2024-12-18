@@ -45,9 +45,8 @@ const Footer = () => {
           <div className="flex flex-col md:mb-0">
             <h3 className="text-3xl font-bold text-black pb-[20px]">ORELSA COSMETICS</h3>
             <p className="font-normal text-gray-600">
-              400 University Drive Suite 200 <br />
-              Coral Gables, <br />
-              FL 33134 USA
+              Bakı şəhəri, Nizami rayonu<br />
+              Bəhruz Nuriyev
             </p>
           </div>
 
@@ -74,7 +73,7 @@ const Footer = () => {
             <form className="flex gap-2 mt-2" onSubmit={handleSubmit}>
               <input
                 type="email"
-                placeholder="Email adresi daxil edin"
+                placeholder="Email daxil edin"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full border rounded-lg px-4 py-2 text-gray-700 bg-white shadow focus:outline-none transition-all"
