@@ -68,7 +68,7 @@ export class GuestService {
 
   // Bütün məhsulları gətir
   async getAllProduct(): Promise<Product[]> {
-    return await this.productModel.find({ active: true }).sort({ price: 1 });
+    return await this.productModel.find({ active: true }).sort({ price: 1 , discount_price: 1 });
   }
 
   // İD -sinə görə gətir
