@@ -11,7 +11,6 @@ import {
   DropdownTrigger,
 } from "@nextui-org/react";
 import currency from "currency.js";
-import { toNumber } from "lodash-es";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
