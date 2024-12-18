@@ -3,7 +3,7 @@
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import { ProductDetail } from "@/Utils/db";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ShopRooms = ({
   numberOfProducts,
@@ -15,6 +15,8 @@ const ShopRooms = ({
   const [products, setProducts] = useState<ProductDetail[]>([]);
   const [currentPage, setCurrentPage] = useState(1); // Hal-hazırkı səhifə nömrəsi
   const itemsPerPage = 16; // Hər səhifədəki məhsul sayı
+
+  const productsRef = useRef<HTMLDivElement>(null); // Məhsul hissəsinə ref təyin edin
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -49,11 +51,17 @@ const ShopRooms = ({
   // Səhifə nömrəsini dəyişmək üçün funksiya
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+
+    // Məhsulların başladığı hissəyə keçmək
+    if (productsRef.current) {
+      productsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <section>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mt-10 pb-3">
+      {/* Məhsullar siyahısı */}
+      <div ref={productsRef} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
         {currentProducts.map((product: ProductDetail) => (
           <ProductCard key={product._id} {...product} />
         ))}
@@ -66,33 +74,20 @@ const ShopRooms = ({
       {/* Pagination düymələri */}
       {totalPages > 1 && (
         <div className="flex justify-center mt-4">
-          <button
-            className="px-4 py-2 mx-1 bg-gray-200 hover:bg-green-300"
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            Previous
-          </button>
           {[...Array(totalPages)].map((_, index) => (
             <button
               key={index}
               className={`px-4 py-2 mx-1 ${
                 currentPage === index + 1
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 hover:bg-green-300"
+                  ? "bg-orange-500 text-white"
+                  : "bg-orange-200 hover:bg-orange-300"
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
             </button>
           ))}
-          <button
-            className="px-4 py-2 mx-1 bg-gray-200 hover:bg-green-300"
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            Next
-          </button>
+        
         </div>
       )}
     </section>

@@ -48,13 +48,13 @@ export class AdminService {
     } else {
       // Şəkil xaric digər datalar dəyişirsə
       const updatedNewCollection = await this.homeNewCollectionModel.findByIdAndUpdate(_id, { $set: { ...UpdateNewCollectiontDto } }, { new: true })
-      if (updatedNewCollection.active === true){
+      if (updatedNewCollection.active === true) {
         await this.homeNewCollectionModel.updateMany(
           { _id: { $ne: _id } },  // Mövcud kolleksiya xaricində olanlar
           { $set: { active: false } }  // active sahəsini false edirik
         )
       }
-        return { message: "Yeni kolleksiyada dəyişikliklər icra olundu!✅" }
+      return { message: "Yeni kolleksiyada dəyişikliklər icra olundu!✅" }
     }
 
   }
@@ -188,7 +188,7 @@ export class AdminService {
 
   // Yaranmış məhsulda dəyişiklik et
   async updateProduct(_id: string, UpdateProduct: updateProduct, photos: Express.Multer.File[]): Promise<MessageResponse> {
-    const { discount, price, discount_price } = UpdateProduct
+    const { name, description, category, discount, price, discount_price } = UpdateProduct
     const existProduct = await this.productModel.findById(_id)
     if (!existProduct) throw new HttpException('Məhsul artıq bazada mövcud deyil !', HttpStatus.CONFLICT)
 
@@ -209,16 +209,19 @@ export class AdminService {
           from: 'orelsacosmetics@gmail.com',
           to: `${subscribe[i].email}`,
           subject: "Orelsa cosmetics - məhsulda qiymət dəyişikliyi",
-          html: `<h4>Məhsul adı : ${UpdateProduct.name}</h4><br>
-                 <h4>Məhsul haqqında: ${UpdateProduct.description}</h4><br>
-                 <h4>Məhsul kateqoriyası : ${UpdateProduct.category}</h4><br>
-                 <h4>Məhsul qiyməti : ${UpdateProduct.price} AZN</h4><br>
-                 <h4>Məhsul endirim qiyməti : ${discountPrice} AZN</h4><br>
-                 <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
-                 <h2>İnstagram:  https://www.instagram.com/orelsa_cosmetics/</h2><br>
-                 <h2>Sayta keçid: orelsacosmetics.az</h2><br>
-                 <h2>Bizimlə əlaqə: +994559706747</h2>
-                 `
+          html: `  
+                <div style="font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #2a9d8f;">Məhsul adı : ${name}</h4><br>
+                    <h4 style="color: #2a9d8f;">Məhsul haqqında: ${description}</h4><br>
+                    <h4 style="color: #2a9d8f;">Məhsul kateqoriyası : ${category}</h4><br>
+                    <h4 style="color: #e63946;">Məhsul qiyməti : ${price} AZN</h4><br>
+                    <h4 style="color: #e63946;">Məhsul qiyməti : ${discount_price} AZN</h4><br>
+                    <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200" style="border: 2px solid #2a9d8f; border-radius: 10px; margin-top: 10px;" />
+                    <h2 style="color: #e63946;"><a href="https://www.instagram.com/orelsa_cosmetics/" style="text-decoration: none; color: #264653;">İnstagram: @orelsa_cosmetics</a></h2><br>
+                    <h2 style="color: #e63946;"><a href="https://orelsacosmetics.az" style="text-decoration: none; color: #264653;">Sayta keçid: orelsacosmetics.az</a></h2><br>
+                    <h2 style="color: #e63946;">Bizimlə əlaqə: <a href="tel:+994559706747" style="text-decoration: none; color: #2a9d8f;">+994 55 970 67 47</a></h2>
+                </div>
+                `
         })
       }
       return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
@@ -230,15 +233,19 @@ export class AdminService {
           from: 'orelsacosmetics@gmail.com',
           to: `${subscribe[i].email}`,
           subject: "Orelsa cosmetics - məhsulda qiymət dəyişikliyi",
-          html: `<h4>Məhsul adı : ${UpdateProduct.name}</h4><br>
-                 <h4>Məhsul haqqında: ${UpdateProduct.description}</h4><br>
-                 <h4>Məhsul kateqoriyası : ${UpdateProduct.category}</h4><br>
-                 <h4>Məhsul qiyməti : ${UpdateProduct.price} AZN</h4><br>
-                 <h4>Məhsul endirim qiyməti : ${discountPrice} AZN</h4><br>
-                 <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200"/>
-                 <h2>Sayta keçid: orelsacosmetics.az</h2><br>
-                 <h2>Bizimlə əlaqə: +994559706747</h2>
-                 `
+          html: `  
+          <div style="font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; padding: 20px; border-radius: 8px;">
+              <h4 style="color: #2a9d8f;">Məhsul adı : ${name}</h4><br>
+              <h4 style="color: #2a9d8f;">Məhsul haqqında: ${description}</h4><br>
+              <h4 style="color: #2a9d8f;">Məhsul kateqoriyası : ${category}</h4><br>
+              <h4 style="color: #e63946;">Məhsul qiyməti : ${price} AZN</h4><br>
+              <h4 style="color: #e63946;">Məhsul qiyməti : ${discount_price} AZN</h4><br>
+              <img src="${productPhotos[0]}" alt="Məhsul şəkli" width="200" height="200" style="border: 2px solid #2a9d8f; border-radius: 10px; margin-top: 10px;" />
+              <h2 style="color: #e63946;"><a href="https://www.instagram.com/orelsa_cosmetics/" style="text-decoration: none; color: #264653;">İnstagram: @orelsa_cosmetics</a></h2><br>
+              <h2 style="color: #e63946;"><a href="https://orelsacosmetics.az" style="text-decoration: none; color: #264653;">Sayta keçid: orelsacosmetics.az</a></h2><br>
+              <h2 style="color: #e63946;">Bizimlə əlaqə: <a href="tel:+994559706747" style="text-decoration: none; color: #2a9d8f;">+994 55 970 67 47</a></h2>
+          </div>
+          `
         })
       }
       return { message: "Məhsul məlumatları uğurla dəyişdirildi! ✅" }
@@ -276,7 +283,7 @@ export class AdminService {
     return this.subscribeModel.find()
   }
 
-  
+
 
 
 

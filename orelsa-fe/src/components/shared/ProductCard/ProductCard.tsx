@@ -16,10 +16,10 @@ const ProductCard = ({
       key={_id}
       className="relative flex flex-col items-center bg-[#F9F1E7] border rounded-[20px] w-full max-w-[300px] h-auto p-4 shadow-lg hover:shadow-2xl transition duration-300 group"
     >
-      {/* Yeni Ürək İkonu */}
+      {/* Yeni Ürək İkonu
       <div className="absolute top-4 right-4 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md">
         <span className="text-[#E97171] text-lg font-bold">❤</span>
-      </div>
+      </div> */}
 
       {/* Məhsul Şəkli */}
       <div className="relative w-full h-40 mb-4 overflow-hidden rounded-lg">
@@ -66,9 +66,9 @@ const ProductCard = ({
 
       {/* Qiymət Sahəsi */}
       <div className="flex justify-between items-center w-full">
-        <p className="text-lg font-semibold text-[#E97171]">{discount_price || price} AZN</p>
+        <p className="text-lg font-semibold text-[#E97171]"> {((discount_price || price).toFixed(2))} AZN</p>
         {discount > 0 && (
-          <p className="text-sm text-gray-400 line-through">{price} AZN</p>
+          <p className="text-sm text-gray-400 line-through"> {price.toFixed(2)} AZN</p>
         )}
       </div>
     </div>

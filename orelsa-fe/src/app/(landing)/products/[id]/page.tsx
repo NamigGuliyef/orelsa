@@ -35,19 +35,12 @@ export default async function ShopDetails({ params }: IProps) {
                   <Link href="/shop" className="text-sm sm:text-base">
                     Mağaza
                   </Link>
-                  <span className="font-bold">&gt;</span>
+                  <span className="font-bold">&gt; </span>
                 </div>
               </div>
 
-              <div className="flex justify-between items-center gap-5 py-10">
-                <Image
-                  src="/Shop/Line.svg"
-                  alt="mixer imag"
-                  width={100}
-                  height={100}
-                  className="w-auto h-auto relative"
-                />
-                <p>{data.name}</p>
+              <div className="flex justify-between items-center gap-10 py-10">
+                <p> {data.name}</p>
               </div>
             </div>
           </div>

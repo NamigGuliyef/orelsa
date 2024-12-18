@@ -79,7 +79,7 @@ export default function ShopPage() {
       <section className="bg-[#F9F1E7] py-6">
         <LandingContainer>
           <div className="flex justify-between items-center gap-6 w-full">
-            <div className="flex justify-between items-center gap-6">
+            {/* <div className="flex justify-between items-center gap-6">
               <div className="flex justify-center items-center gap-8">
                 <p>
                   {`Göstərilən ${
@@ -90,9 +90,9 @@ export default function ShopPage() {
                    of ${childDataLength} nəticə`}
                 </p>
               </div>
-            </div>
+            </div> */}
 
-            <div className="flex justify-between items-center gap-4">
+            {/* <div className="flex justify-between items-center gap-4">
               <div className="flex justify-center items-center gap-4">
                 <p className="">Göstərilən:</p>
                 <Dropdown className="w-[4rem] bg-slate-50">
@@ -114,7 +114,7 @@ export default function ShopPage() {
                   </DropdownMenu>
                 </Dropdown>
               </div>
-            </div>
+            </div> */}
           </div>
         </LandingContainer>
       </section>

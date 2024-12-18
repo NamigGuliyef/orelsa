@@ -24,28 +24,29 @@ const Header: FC = () => {
     <header className="py-6 px-6 bg-transparent">
       <LandingContainer>
         <nav className="flex justify-between items-center w-full max-w-[1280px] mx-auto relative bg-transparent gap-3">
-          
+
           {/* Logo və Başlıq */}
           <div className="flex justify-start items-center space-x-0" id="logo">
-  <Link href="/" className="cursor-pointer flex items-center gap-0">
-    <div className="relative">
-      <Image
-        src="/NavbarLogo/logoicon.jpeg"
-        alt="icon"
-        width={200}
-        height={182}
-        className="object-cover"
-      />
-      <Image
-        src="/HomePage/santa-hat.png"
-        alt="Santa Hat"
-        width={45}
-        height={45}
-        className="absolute top-[-15px] left-4 opacity-100"
-      />
-    </div>
-  </Link>
-</div>
+            <Link href="/" className="cursor-pointer flex items-center gap-0">
+              <div className="relative">
+                <Image
+                  src="/NavbarLogo/logoicon.jpeg"
+                  alt="icon"
+                  width={160}
+                  height={142}
+                  className="object-cover rounded-full" // Burada kənarları oval etmək üçün `rounded-full` əlavə etdik
+                />
+                <Image
+                  src="/HomePage/santa-hat.png"
+                  alt="Santa Hat"
+                  width={40}
+                  height={40}
+                  className="absolute top-[-14px] left-3.5 opacity-100"
+                />
+              </div>
+            </Link>
+          </div>
+
 
 
           {/* Navigasiya Links */}
@@ -82,22 +83,22 @@ const Header: FC = () => {
 
             {/* Mobil Menu */}
             {state && (
-  <div className="absolute top-full left-40 w-50 bg-white/70 backdrop-blur-md shadow-lg z-30 lg:hidden">
-    <ul className="flex flex-col items-start space-y-4 p-4">
-      {navLinks.map((link) => (
-        <li key={link.id} className="w-full">
-          <Link
-            href={link.link}
-            className="text-black font-medium text-base hover:text-primary transition duration-200 block w-full"
-            onClick={setFalse}
-          >
-            {link.name}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+              <div className="absolute top-full left-40 w-50 bg-white/70 backdrop-blur-md shadow-lg z-30 lg:hidden">
+                <ul className="flex flex-col items-start space-y-4 p-4">
+                  {navLinks.map((link) => (
+                    <li key={link.id} className="w-full">
+                      <Link
+                        href={link.link}
+                        className="text-black font-medium text-base hover:text-primary transition duration-200 block w-full"
+                        onClick={setFalse}
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </nav>
       </LandingContainer>

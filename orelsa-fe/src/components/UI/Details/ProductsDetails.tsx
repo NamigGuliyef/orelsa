@@ -31,7 +31,9 @@ const ProductsDetails = ({
       <LandingContainer>
         <div className="flex flex-wrap items-start gap-6">
           {/* Sol Thumbnail Bölməsi */}
-          <div className="flex flex-col gap-3">
+          <div
+            className="flex flex-row flex-wrap gap-3 md:flex-col"
+          >
             {photos?.map((src: string, index: number) => (
               <Image
                 key={index}
@@ -39,13 +41,13 @@ const ProductsDetails = ({
                 alt="thumbnail"
                 width={76}
                 height={80}
-                className={`cursor-pointer rounded-md border-2 ${
-                  selectedImage === src ? "border-green-500" : "border-gray-300"
-                }`}
+                className={`cursor-pointer rounded-md border-2 ${selectedImage === src ? "border-green-500" : "border-gray-300"
+                  }`}
                 onClick={() => handleImageOnClick(src)}
               />
             ))}
           </div>
+
 
           {/* Əsas Şəkil */}
           <div id="main-photo" className="relative flex justify-center w-full sm:w-auto">
@@ -72,11 +74,11 @@ const ProductsDetails = ({
 
               {discount > 0 ? (
                 <div className="flex items-center gap-4 mt-4">
-                  <p className="text-3xl text-red-500 font-bold">{discount_price} AZN</p>
-                  <p className="text-2xl text-gray-400 line-through">{price} AZN</p>
+                  <p className="text-3xl text-red-500 font-bold">{discount_price.toFixed(2)} AZN</p>
+                  <p className="text-2xl text-gray-400 line-through">{price.toFixed(2)} AZN</p>
                 </div>
               ) : (
-                <p className="text-3xl text-red-500 font-bold mt-4">{price} AZN</p>
+                <p className="text-3xl text-red-500 font-bold mt-4">{price.toFixed(2)} AZN</p>
               )}
             </div>
 
@@ -118,7 +120,7 @@ const ProductsDetails = ({
                   <FaLinkedinIn className="text-blue-700" />
                 </Link>
                 <Link href="https://tiktok.com" target="_blank">
-                 <AiOutlineTikTok className="text-blue-800" />
+                  <AiOutlineTikTok className="text-blue-800" />
                 </Link>
               </div>
             </div>
