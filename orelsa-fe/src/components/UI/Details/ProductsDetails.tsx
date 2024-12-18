@@ -6,8 +6,8 @@ import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { AiOutlineInstagram, AiOutlineTikTok } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
+import { AiOutlineTikTok } from "react-icons/ai";
+import { FaFacebook, FaLinkedinIn } from "react-icons/fa";
 
 const ProductsDetails = ({
   _id,
@@ -19,7 +19,7 @@ const ProductsDetails = ({
   category,
   model_no,
   discount,
-}: IProductById & { discount_price?: number; discount?: number }) => {
+}: IProductById & { discount_price: number; discount: number }) => {
   const [selectedImage, setSelectedImage] = useState(photos?.[0] ?? "");
 
   const handleImageOnClick = (imageSrc: string) => {
@@ -27,11 +27,11 @@ const ProductsDetails = ({
   };
 
   return (
-    <section className="bg-white py-4 sm:py-10">
+    <section className="bg-white py-10">
       <LandingContainer>
-        <div className="flex flex-wrap items-start gap-2">
-          {/* Sol Bölmə: Şəkil Thumbnail-lər */}
-          <div className="flex gap-3 flex-row md:flex-col">
+        <div className="flex flex-wrap items-start gap-6">
+          {/* Sol Thumbnail Bölməsi */}
+          <div className="flex flex-col gap-3">
             {photos?.map((src: string, index: number) => (
               <Image
                 key={index}
@@ -39,8 +39,8 @@ const ProductsDetails = ({
                 alt="thumbnail"
                 width={76}
                 height={80}
-                className={`bg-cover bg-no-repeat cursor-pointer rounded-md ${
-                  selectedImage === src ? "ring-2 ring-green-500" : ""
+                className={`cursor-pointer rounded-md border-2 ${
+                  selectedImage === src ? "border-green-500" : "border-gray-300"
                 }`}
                 onClick={() => handleImageOnClick(src)}
               />
@@ -52,9 +52,9 @@ const ProductsDetails = ({
             <Image
               src={selectedImage}
               alt="main"
-              width={480}
-              height={480}
-              className="bg-cover bg-no-repeat rounded-md w-full sm:w-[480px] sm:h-[500px] h-auto max-w-[480px]"
+              width={450}
+              height={450}
+              className="bg-cover bg-no-repeat rounded-md"
             />
             {/* Endirim Faizi */}
             {discount > 0 && (
@@ -64,33 +64,26 @@ const ProductsDetails = ({
             )}
           </div>
 
-          {/* Sağ Bölmə */}
-          <div
-            id="second-part"
-            className="flex flex-col sm:items-start items-center w-full sm:w-auto"
-          >
-            {/* Məhsul Adı */}
-            <div className="text-center sm:text-left">
-              <h2 className="font-semibold text-4xl sm:text-5xl text-gray-1000 mb-4">{name}</h2>
+          {/* Məhsul Məlumatları */}
+          <div id="second-part" className="flex flex-col sm:items-start items-center w-full sm:w-auto">
+            <div className="text-left">
+              <h2 className="text-4xl font-semibold text-green-500">{name}</h2>
+              <p className="text-lg text-gray-500 mt-6">{description}</p>
+
+              {discount > 0 ? (
+                <div className="flex items-center gap-4 mt-4">
+                  <p className="text-3xl text-red-500 font-bold">{discount_price} AZN</p>
+                  <p className="text-2xl text-gray-400 line-through">{price} AZN</p>
+                </div>
+              ) : (
+                <p className="text-3xl text-red-500 font-bold mt-4">{price} AZN</p>
+              )}
             </div>
 
-            {/* Qiymətlər */}
-            {discount > 0 ? (
-              <div className="flex items-center gap-4 mt-2">
-                <p className="text-3xl text-red-500 font-bold">{discount_price} AZN</p>
-                <p className="text-2xl text-gray-400 line-through">{price} AZN</p>
-              </div>
-            ) : (
-              <p className="text-3xl text-red-500 font-bold">{price} AZN</p>
-            )}
-
-            {/* Məhsul Təsviri */}
-            <p className="text-gray-500 text-base mt-4 text-center sm:text-left">{description}</p>
-
             {/* Sifariş Et Button */}
-            <div className="flex justify-center sm:justify-start pt-6">
+            <div className="flex justify-center pt-10 pb-10">
               <Button
-                className="w-56 h-[75px] bg-green-500 font-bold text-white text-lg transform hover:translate-x-2"
+                className="w-56 h-[75px] bg-green-500 font-bold text-white text-base transform hover:translate-x-2"
                 onClick={() => {
                   window.open("https://wa.me/+994559706747", "_blank");
                 }}
@@ -100,29 +93,32 @@ const ProductsDetails = ({
             </div>
 
             {/* Model və Kateqoriya */}
-            <div className="flex flex-col gap-2 mt-6">
-              <div className="flex gap-2 text-gray-500 text-sm">
-                <p>Model:</p>
-                <span className="text-gray-800">{model_no}</span>
+            <div className="flex flex-col w-full items-center sm:items-start text-center">
+              <div className="flex gap-3">
+                <p className="font-normal text-base text-gray-500">Model</p>
+                <span className="font-normal text-base text-gray-500">:</span>
+                <p className="font-normal text-base text-gray-800">{model_no}</p>
               </div>
-              <div className="flex gap-2 text-gray-500 text-sm">
-                <p>Kateqoriya:</p>
-                <span className="text-gray-800">{category}</span>
+              <div className="flex gap-3 mt-2">
+                <p className="font-normal text-base text-gray-500">Category</p>
+                <span className="font-normal text-base text-gray-500">:</span>
+                <p className="font-normal text-base text-gray-800">{category}</p>
               </div>
             </div>
 
             {/* Sosial Şəbəkələr */}
-            <div className="flex items-center gap-6 mt-10">
-              <h6 className="text-gray-500 text-sm">Bizi izləyin:</h6>
-              <div className="flex gap-4 text-xl">
-                <Link href="https://facebook.com" target="_blank">
+            <div id="follow" className="flex gap-6 pt-14">
+              <h6 className="font-normal text-base text-gray-500">Follow us</h6>
+              <span className="font-normal text-base text-gray-500">:</span>
+              <div className="flex gap-4">
+                <Link href="https://facebook.com">
                   <FaFacebook className="text-blue-600" />
                 </Link>
-                <Link href="https://instagram.com" target="_blank">
-                  <AiOutlineInstagram className="text-red-400" />
+                <Link href="https://linkedin.com">
+                  <FaLinkedinIn className="text-blue-700" />
                 </Link>
                 <Link href="https://tiktok.com" target="_blank">
-                  <AiOutlineTikTok className="text-blue-800" />
+                 <AiOutlineTikTok className="text-blue-800" />
                 </Link>
               </div>
             </div>
