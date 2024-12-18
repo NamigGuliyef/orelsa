@@ -24,33 +24,31 @@ const Header: FC = () => {
     <header className="py-6 px-6 bg-transparent">
       <LandingContainer>
         <nav className="flex justify-between items-center w-full max-w-[1280px] mx-auto relative bg-transparent gap-3">
-          <div className="flex justify-start items-center space-x-4" id="logo">
-            <Link href="/" className="cursor-pointer flex items-center gap-2">
-              <div className="relative inline-block w-[50px] h-[32px]">
-                {/* Loqo */}
-                <Image
-                  src="/NavbarLogo/LogoIcon.svg"
-                  alt="icon"
-                  width={50}
-                  height={32}
-                  className="relative"
-                />
+          
+          {/* Logo və Başlıq */}
+          <div className="flex justify-start items-center space-x-0" id="logo">
+  <Link href="/" className="cursor-pointer flex items-center gap-0">
+    <div className="relative">
+      <Image
+        src="/NavbarLogo/logoicon.jpeg"
+        alt="icon"
+        width={200}
+        height={182}
+        className="object-cover"
+      />
+      <Image
+        src="/HomePage/santa-hat.png"
+        alt="Santa Hat"
+        width={45}
+        height={45}
+        className="absolute top-[-15px] left-4 opacity-100"
+      />
+    </div>
+  </Link>
+</div>
 
-                {/* Şaxta Baba Papağı */}
-                <Image
-                  src="/HomePage/santa-hat.png" // Şaxta Baba papağı şəklinizin yeri
-                  alt="Santa Hat"
-                  width={35} // Kiçik ölçü üçün
-                  height={35}
-                  className="absolute -top-4 left-3.5 opacity-100" // Mövqeyi və transparanlıq
-                />
-              </div>
-              <h1 className="font-bold text-4xl text-black hidden md:block">
-                ORELSA
-              </h1>
-            </Link>
-          </div>
 
+          {/* Navigasiya Links */}
           <ul className="hidden lg:flex justify-between items-center space-x-8 bg-transparent">
             {navLinks.map((link) => (
               <li key={link.id}>
@@ -70,6 +68,7 @@ const Header: FC = () => {
               <SearchBar />
             </div>
 
+            {/* Mobil Menu Button */}
             <button
               className="lg:hidden flex items-center text-center"
               onClick={toggle}
@@ -81,8 +80,9 @@ const Header: FC = () => {
               )}
             </button>
 
+            {/* Mobil Menu */}
             {state && (
-  <div className="absolute top-full left-30 w-50 bg-white/70 backdrop-blur-md shadow-lg z-30 lg:hidden">
+  <div className="absolute top-full left-40 w-50 bg-white/70 backdrop-blur-md shadow-lg z-30 lg:hidden">
     <ul className="flex flex-col items-start space-y-4 p-4">
       {navLinks.map((link) => (
         <li key={link.id} className="w-full">

@@ -57,11 +57,11 @@ const SearchBar = () => {
       >
         {isSearchVisible && (
           <form>
-            <div className="relative pt-3">
+            <div className="relative pt-2">
               <input
                 type="search"
                 placeholder="Axtarış"
-                className="w-full focus-visible:outline-none outline-none h-[40px] p-2 rounded-lg border border-gray-300 transition-all duration-200 ease-in-out"
+                className="w-full focus-visible:outline-none outline-none h-[42px] p-2 rounded-lg border border-gray-300 transition-all duration-300 ease-in-out"
                 onChange={(e) => setSearchQuery(e.target.value)}
                 value={searchQuery}
               />
