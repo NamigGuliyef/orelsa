@@ -29,11 +29,9 @@ const ProductsDetails = ({
   return (
     <section className="bg-white py-10">
       <LandingContainer>
-        <div className="flex flex-wrap items-start gap-6">
+        <div className="flex flex-wrap lg:flex-nowrap items-start gap-6">
           {/* Sol Thumbnail Bölməsi */}
-          <div
-            className="flex flex-row flex-wrap gap-3 md:flex-col"
-          >
+          <div className="flex flex-row flex-wrap gap-3 md:flex-col">
             {photos?.map((src: string, index: number) => (
               <Image
                 key={index}
@@ -41,16 +39,14 @@ const ProductsDetails = ({
                 alt="thumbnail"
                 width={76}
                 height={80}
-                className={`cursor-pointer rounded-md border-2 ${selectedImage === src ? "border-green-500" : "border-gray-300"
-                  }`}
+                className={`cursor-pointer rounded-md border-2 ${selectedImage === src ? "border-green-500" : "border-gray-300"}`}
                 onClick={() => handleImageOnClick(src)}
               />
             ))}
           </div>
 
-
           {/* Əsas Şəkil */}
-          <div id="main-photo" className="relative flex justify-center w-full sm:w-auto">
+          <div id="main-photo" className="relative flex justify-center w-full lg:w-auto">
             <Image
               src={selectedImage}
               alt="main"
@@ -67,10 +63,17 @@ const ProductsDetails = ({
           </div>
 
           {/* Məhsul Məlumatları */}
-          <div id="second-part" className="flex flex-col sm:items-start items-center w-full sm:w-auto">
+          <div id="second-part" className="flex flex-col sm:items-start items-center w-full lg:w-1/2">
             <div className="text-left">
               <h2 className="text-4xl font-semibold text-green-500">{name}</h2>
-              <p className="text-lg text-gray-500 mt-6">{description}</p>
+              <p className="text-lg text-gray-500 mt-6">
+                {description.split(/(?<=\G.{100})/).map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </p>
 
               {discount > 0 ? (
                 <div className="flex items-center gap-4 mt-4">
@@ -102,7 +105,7 @@ const ProductsDetails = ({
                 <p className="font-normal text-base text-gray-800">{model_no}</p>
               </div>
               <div className="flex gap-3 mt-2">
-                <p className="font-normal text-base text-gray-500">Category</p>
+                <p className="font-normal text-base text-gray-500">Kateqoriya</p>
                 <span className="font-normal text-base text-gray-500">:</span>
                 <p className="font-normal text-base text-gray-800">{category}</p>
               </div>
@@ -110,7 +113,7 @@ const ProductsDetails = ({
 
             {/* Sosial Şəbəkələr */}
             <div id="follow" className="flex gap-6 pt-14">
-              <h6 className="font-normal text-base text-gray-500">Follow us</h6>
+              <h6 className="font-normal text-base text-gray-500">Bizi izləyin</h6>
               <span className="font-normal text-base text-gray-500">:</span>
               <div className="flex gap-4">
                 <Link href="https://facebook.com">

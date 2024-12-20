@@ -31,7 +31,6 @@ const OurProducts: React.FC = () => {
             Bizim məhsullar
           </h2>
 
-
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
             {products
               .slice(0, showMore ? products.length : 8)
@@ -47,7 +46,11 @@ const OurProducts: React.FC = () => {
             <Button
               variant="solid"
               color="default"
-              className="border-2 border-[#B88E2F] bg-white text-center py-8 px-16 font-semibold text-base text-[#B88E2F]"
+              className={`border-2 px-8 py-4 font-semibold text-base transition-all duration-300 rounded-lg ${
+                showMore
+                  ? "border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white"
+                  : "border-[#B88E2F] text-[#B88E2F] bg-white hover:bg-[#B88E2F] hover:text-white"
+              }`}
               onClick={() => setShowMore((pre) => !pre)}
             >
               {showMore ? "Gizlət" : "Hamısına bax"}

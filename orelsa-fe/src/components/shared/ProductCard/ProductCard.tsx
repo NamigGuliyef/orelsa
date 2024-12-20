@@ -11,18 +11,17 @@ const ProductCard = ({
   discount_price,
   photos,
 }: ProductDetail) => {
+  const truncatedDescription =
+    description?.length > 50
+      ? description.substring(0, 50) + "..."
+      : description;
+
   return (
     <div
       key={_id}
       className="relative flex flex-col items-center bg-[#F9F1E7] border rounded-[20px] w-full max-w-[300px] h-auto p-4 shadow-lg hover:shadow-2xl transition duration-300 group"
     >
-      {/* Yeni Ürək İkonu
-      <div className="absolute top-4 right-4 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md">
-        <span className="text-[#E97171] text-lg font-bold">❤</span>
-      </div> */}
-
-      {/* Məhsul Şəkli */}
-      <div className="relative w-full h-40 mb-4 overflow-hidden rounded-lg">
+      <div className="relative w-full h-40 md:h-60 mb-4 overflow-hidden rounded-lg">
         <Image
           src={photos?.[0]}
           alt={name}
@@ -62,13 +61,26 @@ const ProductCard = ({
       <h2 className="text-lg font-bold text-[#3A3A3A] mb-2">{name}</h2>
 
       {/* Məhsul Açıqlaması */}
-      <p className="text-sm text-[#898989] text-center mb-2">{description}</p>
+      <p className="text-sm text-[#898989] text-center mb-2">
+        {truncatedDescription}
+        {description?.length > 50 && (
+          <Link href={`/products/${_id}`} className="text-[#B88E2F] ml-2">
+            Ətraflı
+          </Link>
+        )}
+      </p>
 
       {/* Qiymət Sahəsi */}
       <div className="flex justify-between items-center w-full">
-        <p className="text-lg font-semibold text-[#E97171]"> {((discount_price || price).toFixed(2))} AZN</p>
+        <p className="text-lg font-semibold text-[#E97171]">
+          {" "}
+          {(discount_price || price).toFixed(2)} AZN
+        </p>
         {discount > 0 && (
-          <p className="text-sm text-gray-400 line-through"> {price.toFixed(2)} AZN</p>
+          <p className="text-sm text-gray-400 line-through">
+            {" "}
+            {price.toFixed(2)} AZN
+          </p>
         )}
       </div>
     </div>

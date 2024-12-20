@@ -23,17 +23,18 @@ const Banner = () => {
     <div
       className="bg-no-repeat bg-cover h-screen flex justify-end items-center"
       style={{
-        background: `url("${newCollection[0]?.newproductPhoto}") no-repeat center center/cover`,
+        background: `url("${newCollection[0]?.newproductPhoto}") no-repeat center center`,
+        backgroundSize: "contain",
       }}
     >
-      <div className="w-full md:w-[90%] lg:w-[60%] xl:w-[50%] shadow-2xl bg-white bg-opacity-40 rounded-[16px] px-6 py-8 mx-5">
-        <h2 className="ml-0 md:ml-11 mt-4 font-bold text-[32px] sm:text-[42px] lg:text-[52px] text-[#B88E2F]">
+      <div className="w-full max-w-[600px] shadow-2xl bg-white bg-opacity-40 rounded-[16px] px-6 py-8 mx-5">
+        <h2 className="ml-0 md:ml-4 mt-4 font-bold text-[32px] sm:text-[42px] lg:text-[52px] text-[#B88E2F]">
           {newCollection[0]?.title}
         </h2>
-        <p className="ml-0 md:ml-11 text-black mt-6 sm:mt-9 text-base sm:text-lg font-medium text-wrap max-w-full sm:max-w-lg">
+        <p className="ml-0 md:ml-4 text-black mt-6 sm:mt-9 text-base sm:text-lg font-medium text-wrap max-w-full">
           {newCollection[0]?.description}
         </p>
-        <div className="ml-0 md:ml-11 pb-6 sm:pb-10 pt-6 sm:pt-9">
+        <div className="ml-0 md:ml-4 pb-6 sm:pb-10 pt-6 sm:pt-9">
           <Link href="https://wa.me/+994559706747" passHref>
             <Button className="gap-3 bg-[#B88E2F] w-full sm:w-[222px] h-[60px] sm:h-[75px] font-bold text-base text-white">
               İndi sifariş et
