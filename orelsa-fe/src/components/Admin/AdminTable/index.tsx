@@ -87,64 +87,6 @@ const AdminTable = () => {
     }
   };
 
-  // const renderCell = React.useCallback((user: any, columnKey: any) => {
-  //   const cellValue = user[columnKey];
-  //   switch (columnKey) {
-  //     case "name":
-  //       return (
-  //         <User
-  //           avatarProps={{ radius: "lg", src: user.avatar }}
-  //           name={cellValue}
-  //           className=""
-  //         >
-  //           {user.email}
-  //         </User>
-  //       );
-  //     case "role":
-  //       return (
-  //         <div className="flex flex-col ">
-  //           <p className="text-bold text-sm capitalize">{cellValue}</p>
-  //           <p className="text-bold text-sm capitalize text-default-400">
-  //             {user.team}
-  //           </p>
-  //         </div>
-  //       );
-  //     case "status":
-  //       return (
-  //         <Chip
-  //           className="capitalize"
-  //           color={statusColorMap[user.status]}
-  //           size="sm"
-  //           variant="flat"
-  //         >
-  //           {cellValue}
-  //         </Chip>
-  //       );
-  //     case "actions":
-  //       return (
-  //         <div className="relative flex items-center gap-2 justify-center">
-  //           <Tooltip content="Details">
-  //             <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-  //               <EyeIcon />
-  //             </span>
-  //           </Tooltip>
-  //           <Tooltip content="Edit user">
-  //             <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-  //               <EditIcon />
-  //             </span>
-  //           </Tooltip>
-  //           <Tooltip color="danger" content="Delete user">
-  //             <span className="text-lg text-danger cursor-pointer active:opacity-50">
-  //               <DeleteIcon aria-describedby={null} />
-  //             </span>
-  //           </Tooltip>
-  //         </div>
-  //       );
-  //     default:
-  //       return cellValue;
-  //   }
-  // }, []);
-
   useEffect(() => {
     getAllProductsAdmin().then((data) => {
       setProducts(data);
@@ -165,13 +107,17 @@ const AdminTable = () => {
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   return (
-    <div>
-      <Table className="w-full">
+    <div className="px-1">
+      <Table
+        aria-label="Product table"
+        className="w-full bg-white shadow-lg rounded-lg"
+      >
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
+              className="text-gray-700 font-semibold"
             >
               {column.name}
             </TableColumn>
@@ -196,18 +142,19 @@ const AdminTable = () => {
               index: number
             ) => {
               return (
-                <TableRow key={_id}>
-                  <TableCell>
+                <TableRow key={_id} className="hover:bg-green-50">
+                  <TableCell className="p-2">
                     <Image
                       src={photos[0]}
                       alt={name}
                       width={100}
                       height={100}
+                      className="rounded-lg"
                     />
                   </TableCell>
                   <TableCell>
                     <input
-                      className="bg-white"
+                      className="bg-white p-2 rounded-md"
                       disabled={editingId !== _id}
                       value={name}
                       onChange={(e) => {
@@ -217,7 +164,7 @@ const AdminTable = () => {
                   </TableCell>
                   <TableCell>
                     <input
-                      className="bg-white"
+                      className="bg-white p-2 rounded-md"
                       disabled={editingId !== _id}
                       value={description}
                       onChange={(e) => {
@@ -225,50 +172,64 @@ const AdminTable = () => {
                       }}
                     />
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="custom-cell-spacing">
                     <input
-                      className="bg-white"
+                      className="bg-white p-2 rounded-md"
                       disabled={editingId !== _id}
                       value={price}
-                      onChange={(e) => {
-                        handleChange(_id, "price", e.target.value);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <input
-                      className="bg-white"
-                      disabled={editingId !== _id}
-                      value={discount_price}
-                      onChange={(e) => {
-                        handleChange(_id, "discount_price", e.target.value);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <input
-                      className="bg-white"
-                      disabled={editingId !== _id}
-                      value={discount}
-                      onChange={(e) => {
-                        handleChange(_id, "discount", e.target.value);
+                      onChange={(e) =>
+                        handleChange(_id, "price", e.target.value)
+                      }
+                      style={{
+                        width: "110%", // Genişlik yüzde olarak ayarlanabilir
+                        height: "40px", // Yükseklik sabit bir değerle ayarlanabilir
                       }}
                     />
                   </TableCell>
 
                   <TableCell>
                     <input
-                      className="bg-white"
+                      className="bg-white p-2 rounded-md"
                       disabled={editingId !== _id}
-                      value={model_no}
+                      value={discount_price}
                       onChange={(e) => {
-                        handleChange(_id, "model_no", e.target.value);
+                        handleChange(_id, "discount_price", e.target.value);
+                      }}
+                      style={{
+                        width: "110%", // Genişlik yüzde olarak ayarlanabilir
+                        height: "40px", // Yükseklik sabit bir değerle ayarlanabilir
                       }}
                     />
                   </TableCell>
                   <TableCell>
                     <input
-                      className="bg-white text-[#34C759]"
+                      className="bg-white p-2 rounded-md"
+                      disabled={editingId !== _id}
+                      value={discount}
+                      onChange={(e) => {
+                        handleChange(_id, "discount", e.target.value);
+                      }}
+                      style={{
+                        width: "110%", // Genişlik yüzde olarak ayarlanabilir
+                        height: "40px", // Yükseklik sabit bir değerle ayarlanabilir
+                      }}
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <input
+                      className="bg-white p-2 rounded-md"
+                      disabled={editingId !== _id}
+                      value={model_no}
+                      onChange={(e) => {
+                        handleChange(_id, "model_no", e.target.value);
+                      }}
+                      
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <input
+                      className="bg-white p-2 rounded-md"
                       disabled={editingId !== _id}
                       value={category}
                       onChange={(e) => {
@@ -279,7 +240,7 @@ const AdminTable = () => {
                   <TableCell>
                     <input
                       type="checkbox"
-                      className="bg-white"
+                      className="bg-white p-2 rounded-md"
                       disabled={editingId !== _id}
                       defaultChecked={active}
                       onChange={(e: any) => {
@@ -302,7 +263,7 @@ const AdminTable = () => {
                         )}
                       </span>
                       <span
-                        className="text-lg text-danger cursor-pointer active:opacity-50 "
+                        className="text-lg text-danger cursor-pointer active:opacity-50"
                         onClick={() => handleDelete(_id)}
                       >
                         <DeleteIcon />
@@ -326,7 +287,7 @@ const AdminTable = () => {
       {totalPages > 1 && (
         <div className="flex justify-center mt-8">
           <button
-            className="w-[40px] h-[40px] rounded-full flex justify-center items-center"
+            className="w-[40px] h-[40px] rounded-full flex justify-center items-center bg-gray-300 hover:bg-gray-400"
             onClick={() => {
               currentPage > 1 && setCurrentPage((prev) => prev - 1);
             }}
@@ -348,7 +309,7 @@ const AdminTable = () => {
             </button>
           ))}
           <button
-            className="w-[40px] h-[40px] rounded-full flex justify-center items-center"
+            className="w-[40px] h-[40px] rounded-full flex justify-center items-center bg-gray-300 hover:bg-gray-400"
             onClick={() => {
               currentPage < totalPages && setCurrentPage((prev) => prev + 1);
             }}

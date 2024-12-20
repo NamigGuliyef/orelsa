@@ -58,37 +58,36 @@ const AdminSideBar = () => {
   }, [router]);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen w-[400px] gap-2.5 bg-[#34C759]">
-      <div>
-        <h2 className="font-black text-3xl text-white py-14 px-7 text-center">
-          Admin Panel
-        </h2>
-        {links.map(({ href, title, src }, i) => (
-          <div key={i} className="flex items-center pl-7 min-h-fit">
-            <Image
-              className="p-[10px] rounded-2xl h-[50px] bg-[orange]"
-              width={50}
-              height={50}
-              src={src}
-              alt=""
-            />
-            <Link
-              href={href}
-              className="flex justify-start items-center text-2xl font-medium text-white py-4 px-4 text-start"
-            >
-              {title}
-            </Link>
-          </div>
-        ))}
-      </div>
-      <Button
-        onClick={handleLogout}
-        className="bg-green-600 text-white rounded-md py-3 mt-40"
-      >
-        Çıxış et
-      </Button>
-      <div className="flex justify-center font-black text-3xl text-white pb-4 items-end h-full">
-        <Link href="/admin/products">ORELSA.AZ</Link>
+    <div className="flex">
+      {/* Sidebar */}
+      <div className="w-[300px] bg-[#2D3748] h-screen flex flex-col justify-between text-white">
+        <div>
+          <h2 className="text-2xl font-bold text-center py-8">Admin Panel</h2>
+          <nav className="flex flex-col">
+            {links.map(({ href, title, src }, i) => (
+              <Link
+                href={href}
+                key={i}
+                className="flex items-center gap-4 px-6 py-3 hover:bg-gray-700 transition-colors"
+              >
+                <Image
+                  src={src}
+                  alt={title}
+                  width={30}
+                  height={30}
+                  className="rounded-md"
+                />
+                <span>{title}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <Button
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-600 mx-6 my-4"
+        >
+          Çıxış et
+        </Button>
       </div>
     </div>
   );
