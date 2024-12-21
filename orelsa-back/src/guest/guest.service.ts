@@ -68,7 +68,9 @@ export class GuestService {
 
   // Bütün məhsulları gətir
   async getAllProduct(): Promise<Product[]> {
-    return await this.productModel.find({ active: true }).sort({ price: 1 , discount_price: 1 });
+    return await this.productModel
+      .find({ active: true })
+      .sort({ price: 1, discount_price: 1 });
   }
 
   // İD -sinə görə gətir
@@ -105,5 +107,9 @@ export class GuestService {
     if (model_no) filter.model_no = { $regex: model_no, $options: 'i' };
     if (category) filter.category = { $regex: category, $options: 'i' };
     return await this.productModel.find(filter);
+  }
+
+  async categoryFilter(category: string): Promise<Product[]> {
+    return await this.productModel.find({ category });
   }
 }

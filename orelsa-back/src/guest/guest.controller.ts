@@ -113,4 +113,11 @@ export class GuestController {
   }
 
 
+  @ApiOperation({ summary: "Kateqoriya üzrə axtarış" })
+  @Get('/category-product')
+  @HttpCode(HttpStatus.OK)
+  async categoryFilter(@Body('category') category: string): Promise<Product[]> {
+    return await this.guestService.categoryFilter(category);
+  }
+
 }

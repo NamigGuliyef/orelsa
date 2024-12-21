@@ -3,13 +3,6 @@
 import Quality from "@/components/UI/Quality/Quality";
 import ShopRooms from "@/components/UI/ShopRooms/ShopRooms";
 import LandingContainer from "@/components/Views/Landing/LandingContainer";
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@nextui-org/react";
 import currency from "currency.js";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -79,42 +72,6 @@ export default function ShopPage() {
       <section className="bg-[#F9F1E7] py-6">
         <LandingContainer>
           <div className="flex justify-between items-center gap-6 w-full">
-            {/* <div className="flex justify-between items-center gap-6">
-              <div className="flex justify-center items-center gap-8">
-                <p>
-                  {`Göstərilən ${
-                    currency(selectedNumberOfProducts).subtract(currency(15))
-                      ?.value
-                  } – 
-                  ${Math.min(childDataLength, selectedNumberOfProducts)} 
-                   of ${childDataLength} nəticə`}
-                </p>
-              </div>
-            </div> */}
-
-            {/* <div className="flex justify-between items-center gap-4">
-              <div className="flex justify-center items-center gap-4">
-                <p className="">Göstərilən:</p>
-                <Dropdown className="w-[4rem] bg-slate-50">
-                  <DropdownTrigger>
-                    <Button variant="bordered" className="capitalize">
-                      {selectedNumberOfProducts}
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu
-                    aria-label="Number of products to show"
-                    variant="flat"
-                    selectionMode="single"
-                    selectedKeys={new Set([selectedNumberOfProducts])}
-                    onSelectionChange={handleNumberOfProductsChange}
-                  >
-                    {dropdownItems.map((item) => (
-                      <DropdownItem key={item}>{item}</DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
-              </div>
-            </div> */}
           </div>
         </LandingContainer>
       </section>

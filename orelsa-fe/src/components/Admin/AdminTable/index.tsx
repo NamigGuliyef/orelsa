@@ -1,5 +1,5 @@
 "use client";
-
+ 
 import { deleteProduct, getAllProductsAdmin, updateProduct } from "@/api/admin";
 import {
   Table,

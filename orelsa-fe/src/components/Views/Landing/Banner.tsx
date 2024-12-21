@@ -23,8 +23,9 @@ const Banner = () => {
     <div
       className="bg-no-repeat bg-cover h-screen flex justify-end items-center"
       style={{
-        background: `url("${newCollection[0]?.newproductPhoto}") no-repeat center center`,
-        backgroundSize: "contain",
+        backgroundImage: `url("${newCollection[0]?.newproductPhoto}")`,
+        backgroundSize: "cover", // Şəkili tam ölçüdə göstərmək üçün 'cover' istifadə olunur
+        backgroundPosition: "center",
       }}
     >
       <div className="w-full max-w-[600px] shadow-2xl bg-white bg-opacity-40 rounded-[16px] px-6 py-8 mx-5">
