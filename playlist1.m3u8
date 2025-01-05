@@ -1,0 +1,4 @@
+#EXTM3U url-tvg="http://epg.cdntv.online/full.xml.gz"
+#EXTINF:0 tvg-id="2" tvg-logo="https://github.com/NamigGuliyef/orelsa/1.png" catchup="shift" catchup-days="3" timeshift="3" group-title="Федеральные", Россия 1
+#EXTGRP:Федеральные
+https://github.com/NamigGuliyef/orelsa/1.m3u8
